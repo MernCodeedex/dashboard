@@ -8,6 +8,9 @@ import SplitButton from "react-bootstrap/SplitButton";
 import { Dropdown } from "react-bootstrap";
 import axios from "axios";
 import Swal from "sweetalert2";
+import { EditorState } from "draft-js";
+import { Editor } from "react-draft-wysiwyg";
+import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 
 function AddProduct() {
   const [productDetails, setProductDetails] = useState({
@@ -28,6 +31,12 @@ function AddProduct() {
     backgroundColor: "#f2f2f2",
     border: "1px solid #ddd",
     color: "#5b5a5a",
+  };
+
+  const [editorState, setEditorState] = useState(EditorState.createEmpty());
+
+  const onEditorStateChange = (newEditorState) => {
+    setEditorState(newEditorState);
   };
 
   const handleGenderSelect = (eventKey) => {
@@ -131,7 +140,11 @@ function AddProduct() {
               </h3>
               <p
                 className="ms-5"
-                style={{ fontWeight: "500", lineHeight: "3px" }}
+                style={{
+                  fontWeight: "500",
+                  lineHeight: "3px",
+                  color: "#828181",
+                }}
               >
                 Orders placed across your store
               </p>
@@ -209,8 +222,25 @@ function AddProduct() {
               >
                 Product Description
               </h5>
+              <div className="ms-5 mt-3" style={{ width: "80%" }}>
+                <Editor
+                  editorState={editorState}
+                  toolbar={{
+                    options: ["history", "inline", "list", "textAlign", "link"],
+                    inline: {
+                      options: ["bold", "italic", "underline", "strikethrough"],
+                    },
+                    textAlign: {
+                      options: ["left", "center", "right", "justify"],
+                    },
+                    list: {
+                      options: ["unordered", "ordered"],
+                    },
+                  }}
+                />
+              </div>
               <textarea
-                className="ms-5 mt-2"
+                className="ms-5 "
                 onChange={(e) =>
                   setProductDetails({
                     ...productDetails,
@@ -219,6 +249,7 @@ function AddProduct() {
                 }
                 style={{
                   width: "80%",
+                  marginTop: "-40px",
                   flex: 1,
                   fontSize: ".8rem",
                   borderRadius: "5px",
@@ -227,7 +258,7 @@ function AddProduct() {
                   boxSizing: "border-box",
                   height: "28vh",
                 }}
-                placeholder="Write title here..."
+                placeholder="Write a description here..."
               />
 
               <h5
