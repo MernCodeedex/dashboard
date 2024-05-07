@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Sidebar from "../Components/Sidebar";
 import Header from "../Components/Header";
-import { Col, Row } from "react-bootstrap";
+import { Col, DropdownItem, Form, Row } from "react-bootstrap";
 import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
 import SplitButton from "react-bootstrap/SplitButton";
@@ -10,9 +10,17 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import { EditorState } from "draft-js";
 import { Editor } from "react-draft-wysiwyg";
+import DropdownButton from 'react-bootstrap/DropdownButton';
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
+import './Product.css'
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
+
+
 
 function AddProduct() {
+
+  const [editorValue, setEditorValue] = useState('');
   const [productDetails, setProductDetails] = useState({
     Product_Name: "",
     Description: "",
@@ -26,13 +34,6 @@ function AddProduct() {
   });
   console.log(productDetails);
 
-  const sidebarStyle = {
-    width: "200px",
-    backgroundColor: "#f2f2f2",
-    border: "1px solid #ddd",
-    color: "#5b5a5a",
-  };
-
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
 
   const onEditorStateChange = (newEditorState) => {
@@ -40,12 +41,14 @@ function AddProduct() {
   };
 
   const handleGenderSelect = (eventKey) => {
+    console.log("Selected gender:", eventKey);
     setProductDetails({
       ...productDetails,
       Gender: eventKey,
     });
   };
   const handleCategorySelect = (eventKey) => {
+
     setProductDetails({
       ...productDetails,
       Category: eventKey,
@@ -63,12 +66,14 @@ function AddProduct() {
       sizes: eventKey,
     });
   };
-  const handleFileSelect = (event) => {
-    setProductDetails({
-      ...productDetails,
-      product_images: Array.from(event.target.files),
-    });
-  };
+  // const handleFileSelect = (event) => {
+  //   setProductDetails({
+  //     ...productDetails,
+  //     product_images: Array.from(event.target.files),
+  //   });
+  // };
+
+  //api to add products
   const handlesubmit = () => {
     const formData = new FormData();
     formData.append("Category", productDetails.Category);
@@ -110,31 +115,161 @@ function AddProduct() {
       });
   };
 
+  //sidebar style
+  const sidebarStyle = {
+    width: "200px",
+    backgroundColor: "#f2f2f2",
+    border: "1px solid #ddd",
+    color: "#5b5a5a",
+  };
+
   const itemStyle = {
     padding: "10px",
     borderBottom: "1px solid #ddd",
     backgroundColor: "#f6f8fb",
   };
+
+
+  const [selectedImages, setSelectedImages] = useState([]);
+
+  const handleFileSelect = (event) => {
+    const files = event.target.files;
+    const imagesArray = [];
+
+    for (let i = 0; i < files.length; i++) {
+      const file = files[i];
+      const reader = new FileReader();
+
+      reader.onload = (e) => {
+        imagesArray.push(e.target.result);
+        if (imagesArray.length === files.length) {
+          setSelectedImages(imagesArray);
+          setProductDetails({
+            ...productDetails,
+            product_images: imagesArray,
+          });
+        }
+      };
+
+      reader.readAsDataURL(file);
+    }
+  };
+
+
+  const removeImage = (index) => {
+    const newImages = [...selectedImages];
+    newImages.splice(index, 1);
+    setSelectedImages(newImages);
+  };
+
+  const [fabric, setFabric] = useState('');
+  const [otherFabric, setOtherFabric] = useState('');
+
+  const handleFabricChange = (event) => {
+    const selectedFabric = event.target.value;
+    setFabric(selectedFabric);
+
+    // Reset the otherFabric input when a different fabric is selected
+    if (selectedFabric !== 'Other') {
+      setOtherFabric('');
+    }
+  };
+
+
+  const [options, setOptions] = useState([
+    { id: 1, name: '', value: '' } // Initial option
+  ]);
+
+  // Function to handle changes in option name
+  const handleOptionNameChange = (id, value) => {
+    const updatedOptions = options.map(option =>
+      option.id === id ? { ...option, name: value } : option
+    );
+    setOptions(updatedOptions);
+  };
+
+  // Function to handle changes in option value
+  const handleOptionValueChange = (id, value) => {
+    const updatedOptions = options.map(option =>
+      option.id === id ? { ...option, value: value } : option
+    );
+    setOptions(updatedOptions);
+  };
+
+  // Function to add a new option
+  const addOption = () => {
+    const newId = options.length + 1;
+    setOptions([...options, { id: newId, name: '', value: '' }]);
+  };
+
+  // Function to remove an option
+  const removeOption = (id) => {
+    const updatedOptions = options.filter(option => option.id !== id);
+    setOptions(updatedOptions);
+  };
+
+
+  // Define the initial state and functions for options on the left side
+  const [leftOptions, setLeftOptions] = useState([
+    { id: 1, name: '', value: '' } // Initial option
+  ]);
+
+  // Function to handle changes in option name on the left side
+  const handleLeftOptionNameChange = (id, value) => {
+    const updatedOptions = leftOptions.map(option =>
+      option.id === id ? { ...option, name: value } : option
+    );
+    setLeftOptions(updatedOptions);
+  };
+
+  // Function to handle changes in option value on the left side
+  const handleLeftOptionValueChange = (id, value) => {
+    const updatedOptions = leftOptions.map(option =>
+      option.id === id ? { ...option, value: value } : option
+    );
+    setLeftOptions(updatedOptions);
+  };
+
+  // Function to add a new option on the left side
+  const addLeftOption = () => {
+    const newId = leftOptions.length + 1;
+    setLeftOptions([...leftOptions, { id: newId, name: '', value: '' }]);
+  };
+
+  // Function to remove an option on the left side
+  const removeLeftOption = (id) => {
+    const updatedOptions = leftOptions.filter(option => option.id !== id);
+    setLeftOptions(updatedOptions);
+  };
+
+
+
+
+
+
+
   return (
     <div style={{ overflow: "hidden" }}>
       <Header />
 
       <Row>
-        <Col lg={2}>
-          <Sidebar />
+        <Col lg={3}>
+          <Sidebar></Sidebar>
         </Col>
 
         <Col
-          lg={10}
+
           style={{
             backgroundColor: "#f6f8fb",
             borderLeft: "1px solid #b6b6b5",
+            width: "79%",
+            marginLeft: "-60px"
           }}
         >
           <Row>
             {" "}
             <Col md={4}>
-              <h3 className="ms-5 text-black">
+              <h3 className="ms-5 mt-3 text-black">
                 {" "}
                 <b>Add a Product</b>
               </h3>
@@ -149,8 +284,8 @@ function AddProduct() {
                 Orders placed across your store
               </p>
             </Col>
-            <Col md={4}> </Col>
-            <Col md={4} className="mt-4">
+            <Col md={3}> </Col>
+            <Col md={5} className="mt-4">
               {" "}
               <Button
                 variant="outlined"
@@ -207,7 +342,7 @@ function AddProduct() {
                 }
                 style={{
                   width: "80%",
-                  height: "5vh",
+                  height: "7vh",
                   fontSize: ".8rem",
                   borderRadius: "5px",
                   padding: "10px",
@@ -220,9 +355,63 @@ function AddProduct() {
                 className="ms-5 mt-5 text-black"
                 style={{ WebkitTextStroke: ".6px" }}
               >
+                Display Image
+              </h5>
+              <div>
+                <div className="imageContainer">
+                  {selectedImages.map((image, index) => (
+                    <div className="imgdiv" key={index}>
+                      <i className="fa-solid fa-xmark closeicon" onClick={() => removeImage(index)}></i>            <img className="subimage" src={image} alt={`Image ${index}`} />
+                    </div>
+                  ))}
+                </div>
+
+                <div
+                  className="ms-5 mt-3"
+                  style={{
+                    paddingTop: "60px",
+                    border: "1px dashed ",
+                    width: "80%",
+                    height: "38vh",
+                    marginBottom: "10%",
+                    cursor: "pointer",
+                  }}
+                  onClick={() => document.getElementById('fileInput').click()}
+                >
+                  <center>
+                    <label htmlFor="fileInput" style={{ cursor: "pointer" }}>
+                      Drag Your Photos here or{" "}
+                      <span>
+                        <span
+                          style={{ textDecoration: "none", color: "#0468d5" }}
+                          href=""
+                        >
+                          Browse from device
+                        </span>
+                      </span>
+                    </label>
+                    <input
+                      onChange={handleFileSelect}
+                      type="file"
+                      id="fileInput"
+                      multiple
+                      style={{ display: "none" }}
+                    />
+                    <br />
+                    <i
+                      style={{ color: "#667283" }}
+                      className="fa-solid fa-image fa-3x mt-2"
+                    ></i>
+                  </center>
+                </div>
+              </div>
+              <h5
+                className="ms-5 mt-5 text-black"
+                style={{ WebkitTextStroke: ".6px" }}
+              >
                 Product Description
               </h5>
-              <div className="ms-5 mt-3" style={{ width: "80%" }}>
+              {/* <div className="ms-5 mt-3" style={{ width: "80%" }}>
                 <Editor
                   editorState={editorState}
                   toolbar={{
@@ -259,50 +448,94 @@ function AddProduct() {
                   height: "28vh",
                 }}
                 placeholder="Write a description here..."
-              />
-
-              <h5
-                className="ms-5 mt-5 text-black"
-                style={{ WebkitTextStroke: ".6px" }}
-              >
-                Display Image
-              </h5>
-              <div
-                className="ms-5 mt-3"
-                style={{
-                  paddingTop: "60px",
-                  border: "1px dashed ",
-                  width: "80%",
-                  height: "28vh",
-                  marginBottom: "10%",
+              /> */}
+              <ReactQuill
+                style={{ width: "80%", marginLeft: "47px", height: "150px" }}
+                value={editorValue}
+                onChange={(content, delta, source, editor) => {
+                  setEditorValue(content);
+                  setProductDetails({
+                    ...productDetails,
+                    Description: content,
+                  });
                 }}
-              >
-                <center>
-                  <label htmlFor="fileInput" style={{ cursor: "pointer" }}>
-                    Drag Your Photos here or{" "}
-                    <span>
-                      <span
-                        style={{ textDecoration: "none", color: "#0468d5" }}
-                        href=""
+                modules={{
+                  toolbar: [
+                    [{ header: [1, 2, false] }],
+                    ['bold', 'italic', 'underline', 'strike'],
+                    [{ align: [] }],
+                    ['list', 'bullet'],
+                    ['link'],
+                    ['history'],
+                  ]
+                }}
+                theme="snow"
+              />
+              <div className="mt-5">
+                {leftOptions.map(option => (
+                  <div key={option.id}>
+                    <h5 className="mt-2 ms-2" style={{ color: '#464646' }}>
+                      <b style={{ marginLeft: "40px" }}>Options {option.id}</b>
+                      {leftOptions.length > 1 && (
+                        <Link
+                          style={{ textDecoration: 'none', color: '#0468d5', marginLeft: '10px',fontSize:"15px"}}
+                          onClick={() => removeLeftOption(option.id)}
+                        >
+                          Remove
+                        </Link>
+                      )}
+                    </h5>
+                    <div className="form-group p-2">
+                      <Form.Select
+                        style={{ width: "83%", marginLeft: "38px" }}
+                        id={`dropdown-button-drop-down-centered-${option.id}`}
+                        onChange={(e) => handleLeftOptionNameChange(option.id, e.target.value)}
                       >
-                        Browse from device
-                      </span>
-                    </span>
-                  </label>
-                  <input
-                    onChange={handleFileSelect}
-                    type="file"
-                    id="fileInput"
-                    multiple
-                    style={{ display: "none" }}
-                  />
-                  <br />
-                  <i
-                    style={{ color: "#667283" }}
-                    className="fa-solid fa-image fa-3x mt-2"
-                  ></i>
-                </center>
+                        <option>Select One</option>
+                        <option>Fit</option>
+                        <option>Features</option>
+                        <option>Waist Rise</option>
+                        <option>Fly Type</option>
+                        <option>Length</option>
+                        <option>Closure</option>
+                        <option>Size & Fit</option>
+                        <option>Material & Care</option>
+                      </Form.Select>
+                    </div>
+
+                    <textarea
+                      onChange={(e) => handleLeftOptionValueChange(option.id, e.target.value)}
+                      className="mt-4 "
+                      style={{
+                        width: '81%',
+                        height: '100px',
+                        border: '1px solid #ced4da',
+                        borderRadius: '4px',
+                        padding: '8px',
+                        marginLeft:"48px"
+                      }}
+                      placeholder="Enter text..."
+                    />
+                  </div>
+                ))}
+
+                <Button
+                  className=" mt-3"
+                  variant="contained"
+                  style={{
+                    backgroundColor: '#f6f8fb',
+                    color: '#0468d5',
+                    height: '35px',
+                    textTransform: 'capitalize',
+                    width: '81%',
+                    marginLeft:"50px"
+                  }}
+                  onClick={addLeftOption}
+                >
+                  Add another Option
+                </Button>
               </div>
+
 
               <h5
                 className="ms-5  mt-5 text-black"
@@ -394,7 +627,7 @@ function AddProduct() {
                       <b>Organize</b>
                     </h5>
                     <p className="ms-2 mt-4" style={{ color: "#464646" }}>
-                      <b>Category</b>{" "}
+                      <b>Gender</b>{" "}
                       <Link
                         style={{ textDecoration: "none", color: "#0468d5" }}
                       >
@@ -402,28 +635,21 @@ function AddProduct() {
                       </Link>
                     </p>
 
-                    <SplitButton
-                      onSelect={handleGenderSelect}
-                      className="ms-2"
-                      style={{
-                        width: "90%",
-                        color: "#464646",
-                        backgroundColor: "white",
-                        border: "1px solid #b0b0b0",
-                      }}
-                      id={`dropdown-button-drop-down-centered`}
-                      drop="down-centered"
-                      variant=""
-                      title="Men's Clothing"
-                    >
-                      <Dropdown.Item eventKey="men">Men</Dropdown.Item>
-                      <Dropdown.Item eventKey="women">Women</Dropdown.Item>
-                      <Dropdown.Item eventKey="boy">Boy</Dropdown.Item>
-                      <Dropdown.Item eventKey="girl">Girl</Dropdown.Item>
-                    </SplitButton>
+
+                    <div className="form-group p-2">
+                      <Form.Select
+                        onChange={(e) => handleGenderSelect(e.target.value)}
+                      >
+                        <option value="">Select One</option>
+                        <option value="men">Men</option>
+                        <option value="women">Women</option>
+                        <option value="boy">Boy</option>
+                        <option value="girl">Girl</option>
+                      </Form.Select>
+                    </div>
 
                     <p className="ms-2 mt-4" style={{ color: "#464646" }}>
-                      <b> Vendor</b>{" "}
+                      <b> Category</b>{" "}
                       <Link
                         style={{ textDecoration: "none", color: "#0468d5" }}
                       >
@@ -432,45 +658,49 @@ function AddProduct() {
                       </Link>
                     </p>
 
-                    <SplitButton
-                      className="ms-2"
-                      style={{
-                        width: "90%",
-                        color: "#464646",
-                        backgroundColor: "white",
-                        border: "1px solid #b0b0b0",
-                      }}
-                      id={`dropdown-button-drop-down-centered`}
-                      drop="down-centered"
-                      variant=""
-                      title="Men's Clothing"
-                      onSelect={handleCategorySelect}
-                    >
-                      <Dropdown.Item eventKey="shirts">Shirt</Dropdown.Item>
-                      <Dropdown.Item eventKey="pants">Pant</Dropdown.Item>
-                      <Dropdown.Item eventKey="shoes">Shoes</Dropdown.Item>
 
-                      <Dropdown.Item eventKey="accessories">
-                        Accessories
-                      </Dropdown.Item>
-                    </SplitButton>
+                    <div className="form-group p-2">
+                      <Form.Select
+                        id={`dropdown-button-drop-down-centered`}
+                        onChange={(e) => handleCategorySelect(e.target.value)}
+                      >
+                        <option>Select One</option>
+                        <option value="shirts">Shirt</option>
+                        <option value="pants">Pant</option>
+                        <option value="shoes">Shoes</option>
+                        <option value="accessories">Accessories</option>
+
+                      </Form.Select>
+                    </div>
                     <p className="ms-2 mt-4" style={{ color: "#464646" }}>
-                      <b>Collection</b>
+                      <b>Fabric Details</b>
                     </p>
 
-                    <SplitButton
-                      className="ms-2"
-                      style={{
-                        width: "90%",
-                        color: "#464646",
-                        backgroundColor: "white",
-                        border: "1px solid #b0b0b0",
-                      }}
-                      id={`dropdown-button-drop-down-centered`}
-                      drop="down-centered"
-                      variant=""
-                      title="Collection"
-                    ></SplitButton>
+
+                    <div className="form-group p-2">
+                      <Form.Select id="fabricSelect" onChange={handleFabricChange} value={fabric}>
+                        <option>Select One</option>
+                        <option>Cotton</option>
+                        <option>Silk</option>
+                        <option>Polyester</option>
+                        <option>Nylon</option>
+                        <option>Other</option>
+                      </Form.Select>
+
+                      {/* Render the input field only when "Other" is selected */}
+                      {fabric === 'Other' && (
+                        <div>
+                          <label htmlFor="otherFabricInput">Other Fabric:</label>
+                          <input
+                            id="otherFabricInput"
+                            type="text"
+                            value={otherFabric}
+                            onChange={(event) => setOtherFabric(event.target.value)}
+                            placeholder="Enter fabric name"
+                          />
+                        </div>
+                      )}
+                    </div>
 
                     <p className="ms-2 mt-4" style={{ color: "#464646" }}>
                       <b> Tags</b>{" "}
@@ -481,26 +711,19 @@ function AddProduct() {
                       </Link>
                     </p>
 
-                    <SplitButton
-                      onSelect={handleTagSelect}
-                      className="ms-2"
-                      style={{
-                        width: "90%",
-                        color: "#464646",
-                        backgroundColor: "white",
-                        border: "1px solid #b0b0b0",
-                        marginBottom: "20px",
-                      }}
-                      id={`dropdown-button-drop-down-centered`}
-                      drop="down-centered"
-                      variant=""
-                      title="Men's Clothing"
-                    >
-                      <Dropdown.Item eventKey="red">Red</Dropdown.Item>
-                      <Dropdown.Item eventKey="blue">Blue</Dropdown.Item>
-                      <Dropdown.Item eventKey="green">Green</Dropdown.Item>
-                      <Dropdown.Item eventKey="yellow">Yellow</Dropdown.Item>
-                    </SplitButton>
+
+                    <div className="form-group p-2">
+                      <Form.Select
+                        id={`dropdown-button-drop-down-centered`}
+                        onChange={(e) => handleTagSelect(e.target.value)}
+                      >
+                        <option>Color</option>
+                        <option value="red">Red</option>
+                        <option value="blue">Blue</option>
+                        <option value="green">Green</option>
+                        <option value="yellow">Yellow</option>
+                      </Form.Select>
+                    </div>
                   </div>
                 </Col>
                 <Col md={2}></Col>
@@ -513,122 +736,60 @@ function AddProduct() {
                   md={8}
                 >
                   <div>
-                    <h5 className="mt-2 ms-2" style={{ color: "#464646" }}>
-                      <b>Variants</b>
-                    </h5>
-                    <p className="ms-2 mt-4" style={{ color: "#464646" }}>
-                      <b>Options 1</b>{" "}
-                      <Link
-                        style={{ textDecoration: "none", color: "#0468d5" }}
-                      >
-                        Remove
-                      </Link>
-                    </p>
+                    {options.map(option => (
+                      <div key={option.id}>
+                        <h5 className="mt-2 ms-2" style={{ color: '#464646' }}>
+                          <b>Options {option.id}</b>
+                          {options.length > 1 && (
+                            <Link
+                              style={{ textDecoration: 'none', color: '#0468d5', marginLeft: '10px',fontSize:"15px" }}
+                              onClick={() => removeOption(option.id)}
+                            >
+                              Remove
+                            </Link>
+                          )}
+                        </h5>
+                        <div className="form-group p-2">
+                          <Form.Select
+                            id={`dropdown-button-drop-down-centered-${option.id}`}
+                            onChange={(e) => handleOptionNameChange(option.id, e.target.value)}
+                          >
+                            <option>Select One</option>
+                            <option>Size</option>
+                            <option>Color</option>
+                            <option>Weight</option>
+                            <option>Smell</option>
+                            <option>Other</option>
+                          </Form.Select>
+                        </div>
 
-                    <SplitButton
-                      onSelect={handleSizeSelect}
-                      className="ms-2"
-                      style={{
-                        width: "90%",
-                        color: "#464646",
-                        backgroundColor: "white",
-                        border: "1px solid #b0b0b0",
-                      }}
-                      id={`dropdown-button-drop-down-centered`}
-                      drop="down-centered"
-                      variant=""
-                      title="Size"
-                    >
-                      <Dropdown.Item eventKey="S">S</Dropdown.Item>
-                      <Dropdown.Item eventKey="L">L</Dropdown.Item>
-                      <Dropdown.Item eventKey="M">M</Dropdown.Item>
-                      <Dropdown.Item eventKey="X">X</Dropdown.Item>
-                      <Dropdown.Item eventKey="XL">XL</Dropdown.Item>
-                    </SplitButton>
-
-                    <textarea
-                      onChange={(e) =>
-                        setProductDetails({
-                          ...productDetails,
-                          sizes: e.target.value,
-                        })
-                      }
-                      className="mt-4 ms-2"
-                      style={{
-                        width: "90%",
-                        height: "100px",
-                        border: "1px solid #ced4da",
-                        borderRadius: "4px",
-                        padding: "8px",
-                      }}
-                      placeholder="Enter text..."
-                    />
-
-                    <div
-                      className="ms-2"
-                      style={{
-                        width: "90%",
-                        borderTop: "1px dashed #999",
-                        margin: "20px 0",
-                      }}
-                    ></div>
-
-                    <p className="ms-2 mt-4" style={{ color: "#464646" }}>
-                      <b>Options 2</b>{" "}
-                      <Link
-                        style={{ textDecoration: "none", color: "#0468d5" }}
-                      >
-                        Remove
-                      </Link>
-                    </p>
-
-                    <SplitButton
-                      className="ms-2"
-                      style={{
-                        width: "90%",
-                        color: "#464646",
-                        backgroundColor: "white",
-                        border: "1px solid #b0b0b0",
-                      }}
-                      id={`dropdown-button-drop-down-centered`}
-                      drop="down-centered"
-                      variant=""
-                      title="Size"
-                    >
-                      <Dropdown.Item eventKey="1">Action</Dropdown.Item>
-                      <Dropdown.Item eventKey="2">Another action</Dropdown.Item>
-                      <Dropdown.Item eventKey="3">
-                        Something else here
-                      </Dropdown.Item>
-                      <Dropdown.Divider />
-                      <Dropdown.Item eventKey="4">Separated link</Dropdown.Item>
-                    </SplitButton>
-
-                    <textarea
-                      className="mt-4 ms-2"
-                      style={{
-                        width: "90%",
-                        height: "100px",
-                        border: "1px solid #ced4da",
-                        borderRadius: "4px",
-                        padding: "8px",
-                      }}
-                      placeholder="Enter text..."
-                      readOnly
-                    />
+                        <textarea
+                          onChange={(e) => handleOptionValueChange(option.id, e.target.value)}
+                          className="mt-4 ms-2"
+                          style={{
+                            width: '90%',
+                            height: '100px',
+                            border: '1px solid #ced4da',
+                            borderRadius: '4px',
+                            padding: '8px',
+                          }}
+                          placeholder="Enter text..."
+                        />
+                      </div>
+                    ))}
 
                     <Button
                       className="ms-2 mt-3"
                       variant="contained"
                       style={{
-                        backgroundColor: "#f6f8fb",
-                        color: "#0468d5",
-                        height: "35px",
-                        textTransform: "capitalize",
-                        width: "90%",
+                        backgroundColor: '#f6f8fb',
+                        color: '#0468d5',
+                        height: '35px',
+                        textTransform: 'capitalize',
+                        width: '90%',
                       }}
+                      onClick={addOption}
                     >
-                      {" "}
                       Add another Option
                     </Button>
                   </div>

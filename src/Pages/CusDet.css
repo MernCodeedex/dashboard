@@ -1,0 +1,221 @@
+/* 
+.user-info img {
+    border-radius: 50%; 
+    width: 150px; 
+    height: 150px; 
+    margin-right: 268px;
+    margin-left: -80px;
+}
+
+.user-name {
+    display: flex;
+    align-items: center; 
+    padding-left: 20px; 
+}
+
+.user-details p {
+    margin-bottom: 5px; 
+}
+.user-name h5{
+    margin-top: -245px;
+    margin-left: 150px;
+    font-size: 30px
+}
+.user-name p{
+    position: absolute;
+    top: 60px; 
+    left: 185px; 
+    color: grey;
+    font-size: medium;
+}
+.dotted-line {
+    position: absolute;
+    bottom: 10;
+    left: 0;
+    width: 100%; 
+    border-bottom: 1px dotted grey; 
+    z-index: 0;
+    margin-top: 26px;
+}
+.user-card{
+    height: 250px;
+}
+.user-follo{
+    margin-top: -43px;
+}
+.user-follo h6{
+   padding-right: 390px; 
+}
+.user-follo p{
+    color: grey;
+    font-size: 25px;
+    padding-right: 390px; 
+    
+}
+.user-det{
+    display: flex;
+}
+.user-pro p{
+    color: grey;
+    font-size: 25px;
+}
+
+.user-follo, .user-pro {
+    flex: 1; 
+}
+.user-pro {
+    margin-left: -360px;
+    margin-top: -43px; 
+}
+.user-com{
+    margin-top: -43px;
+}
+.user-com p{
+    color: grey;
+    font-size: 25px;
+}
+.user-details {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+}
+
+.detail-line {
+    display: flex;
+    align-items: center; 
+    padding-bottom: 5px;
+}
+
+.detail-line h3 {
+    margin-right: 10px;
+}
+
+.user-details p {
+    margin: 0; 
+}
+.detail-line strong {
+    margin-right: 5px; 
+}
+
+.detail-line p {
+    margin: 0; 
+}
+.detail-line a{
+    text-decoration: none;
+}
+.last-card{
+    margin-top: 20px;
+}
+.card-notes{
+    flex-direction: column;
+    padding-top: 5px;
+   
+}
+.card-notes h3{
+    margin-right: 80%;
+}
+.detail-line button{
+    background-color: #2979ff;
+    color: white;
+    border: #2979ff;
+    border-radius: 12%;
+} */
+
+/* .user-pro h6{
+    padding-right: 250px;
+} */
+
+.user-container {
+    margin-left: 90px;
+  }
+  
+  .user-card {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    height: 185px;
+  }
+  
+  .user-info img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin-right: 20px;
+  }
+  .user-info {
+    display: flex;
+    align-items: center;
+  }
+  .user-info::after {
+    content: "";
+    display: block;
+    border-bottom: 1px dotted #ccc;
+    flex-grow: 1;
+    margin-left: 20px;
+  }
+  
+  .user-name h5 {
+    margin-bottom: 5px;
+    font-size: larger;
+  }
+  
+  .dotted-line {
+    /* border-bottom: 1px dotted #ccc;
+    margin-bottom: 20px;
+    border-bottom: 1px dotted grey;  */
+    position: absolute;
+    bottom: 100px;
+    left: 0;
+    width: 100%; 
+    border-bottom: 1px dotted grey; 
+    z-index: 0;
+    margin-top: 26px;
+  }
+  
+  .user-det {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  
+  .detail-line {
+    /* margin-bottom: 10px; */
+    display: flex;
+    align-items: center; 
+    
+  }
+  
+  .card-one {
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .last-card {
+    margin-top: 20px;
+  }
+  
+  .card-notes {
+    text-align: center;
+  }
+  
+  .card-notes textarea {
+    margin-bottom: 10px;
+  }
+  
+  .pagination {
+    justify-content: center;
+  }
+  .user-det p {
+    font-size: 18px; 
+    color: grey; 
+  }
+  
+  
+  .user-det p:nth-of-type(1), 
+  .user-det p:nth-of-type(2), 
+  .user-det p:nth-of-type(3) { 
+    font-size: 20px; 
+    color: grey; 
+  }
