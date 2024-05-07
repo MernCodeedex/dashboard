@@ -71,7 +71,35 @@ input[type="text"] {
     border-radius: 50px;
     font-size: 16px;
   }
+
+  .sidebar{
+    display: none;
+  }
   
+  @media (max-width: 768px) {
+    .logo a{
+        
+        width: 20%;
+    }
+    .search-bar {
+        display: none; /* Hide the search bar */
+       
+    }
+    .ul {
+        display: none; /* Hide the list */
+    }
+   .sidebar2{
+    display: none;
+   }
+   .sidebar{
+    display: block;
+ margin-top: -15%;
+   
+   }
+   .navv{
+    padding: 10px 60px;
+    
+   }
+}
  
-  
-  
+

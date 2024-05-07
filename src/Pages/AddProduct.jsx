@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Sidebar from "../Components/Sidebar";
 import Header from "../Components/Header";
 import { Col, DropdownItem, Form, Row } from "react-bootstrap";
@@ -246,24 +246,22 @@ function AddProduct() {
 
 
 
-
-
   return (
-    <div style={{ overflow: "hidden" }}>
+    <div style={{ overflow: "hidden"}}>
       <Header />
 
       <Row>
-        <Col lg={3}>
-          <Sidebar></Sidebar>
+        <Col lg={2} >
+          {/* <Sidebar ></Sidebar> */}
         </Col>
 
         <Col
-
+className="ms-2"
           style={{
             backgroundColor: "#f6f8fb",
             borderLeft: "1px solid #b6b6b5",
-            width: "79%",
-            marginLeft: "-60px"
+            
+          
           }}
         >
           <Row>
@@ -361,7 +359,7 @@ function AddProduct() {
                 <div className="imageContainer">
                   {selectedImages.map((image, index) => (
                     <div className="imgdiv" key={index}>
-                      <i className="fa-solid fa-xmark closeicon" onClick={() => removeImage(index)}></i>            <img className="subimage" src={image} alt={`Image ${index}`} />
+                      <i className="fa-solid fa-xmark closeicon" onClick={() => removeImage(index)}></i> <img className="subimage" src={image} alt={`Image ${index}`} />
                     </div>
                   ))}
                 </div>
@@ -474,7 +472,7 @@ function AddProduct() {
               <div className="mt-5">
                 {leftOptions.map(option => (
                   <div key={option.id}>
-                    <h5 className="mt-2 ms-2" style={{ color: '#464646' }}>
+                    <h5 className=" ms-2" style={{ color: '#464646',marginTop:"20%" }}>
                       <b style={{ marginLeft: "40px" }}>Options {option.id}</b>
                       {leftOptions.length > 1 && (
                         <Link
@@ -589,7 +587,7 @@ function AddProduct() {
                           placeholder="$$$"
                         />
                       </div>
-                      <div className="ms-3 mt-2">
+                      <div className="ms-4 mt-2">
                         <label
                           htmlFor=""
                           style={{ color: "#5b5a5a" }}
