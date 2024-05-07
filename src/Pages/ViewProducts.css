@@ -1,0 +1,139 @@
+.product-list-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    max-width: 1000px; 
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .product-list-title {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .product-item {
+    width: calc(50% - 20px); 
+    margin-bottom: 20px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+  }
+  
+  .product-item:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .product-details {
+    padding: 20px;
+    position: relative;
+    text-align: center;
+
+  }
+  
+  .product-image {
+    width: 100%;
+    height: auto;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    cursor: pointer;
+    max-width: 100%; 
+    max-height: 200px; 
+    object-fit: contain;
+    margin: auto;
+  }
+  
+  .product-name {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  
+  .product-description {
+    margin-bottom: 10px;
+  }
+  
+  .product-info {
+    margin-bottom: 10px;
+  }
+  
+  .product-price {
+    /* font-weight: bold; */
+    margin-bottom: 10px;
+  }
+  
+  .pagination {
+    margin-top: 20px;
+  }
+  
+  .pagination button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 10px;
+  }
+  
+  .pagination button:hover {
+    background-color: #0056b3;
+  }
+  
+  .product-link {
+    text-decoration: none;
+    color: inherit;
+  }
+  
+  .details-button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    cursor: pointer;
+  }
+  
+  .details-button:hover {
+    background-color: #0056b3;
+  }
+  
+  .big-card {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 20px;
+    width: 600px;
+    height: 400px;
+    display: none;
+  }
+  
+  .big-card.show {
+    display: block;
+    height: 694px;
+  }
+  
+  .close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 24px;
+    color: #999;
+  }
+  
+  .close-button:hover {
+    color: #000;
+  }
+  .big-card img {
+  max-width: 200px; 
+  max-height: 200px; 
+  width: auto;
+  height: auto;
+  margin: 0 auto;
+}
