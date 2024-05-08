@@ -4,7 +4,7 @@ import Sidebar from './Sidebar'
 
 function Header() {
   return (
-    <div >
+    <div style={{position:"fixed",width:"100%",backgroundColor:"white",zIndex:"100"}}>
    
       <nav className='navv'>
      
