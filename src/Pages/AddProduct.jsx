@@ -19,16 +19,27 @@ import "react-quill/dist/quill.snow.css";
 function AddProduct() {
   const [editorValue, setEditorValue] = useState("");
   const [productDetails, setProductDetails] = useState({
-    Product_Name: "",
-    Description: "",
-    product_images: [],
-    sizes: "",
-    Gender: "",
-    Category: "",
-    Price: "",
-    Offer_Price: "",
-    Color: "",
-  });
+    "Product_Name": "",
+    "Description": "",
+    "product_images": [],
+    "sizes": "",
+    "Gender": null,
+    "Category": null,
+    "Price": null,
+    "Offer_Price": null,
+    "Color": null,
+    "Fabric_Type": "",
+    "Fit_Type": "",
+    "Waist_Rise": "",
+    "Features": "",
+    "Closure": "",
+    "Length": "",
+    "Fly_Type": "",
+    "Tags": "",
+    "Express_Delivery": false,
+    "Pay_On_Delivery": false,
+    "Exchange_Days": null
+});
   console.log(productDetails);
 
   const [editorState, setEditorState] = useState(EditorState.createEmpty());
@@ -85,6 +96,16 @@ function AddProduct() {
     formData.append("Price", productDetails.Price);
     formData.append("Offer_Price", productDetails.Offer_Price);
     formData.append("Color", productDetails.Color);
+    formData.append("Fabric_Type", productDetails.Fabric_Type);
+    formData.append("Fit_Type", productDetails.Fit_Type);
+    formData.append("Waist_Rise", productDetails.Waist_Rise);
+    formData.append("Features", productDetails.Features);
+    formData.append("Closure", productDetails.Closure);
+    formData.append("Length", productDetails.Length);
+    formData.append("Fly_Type", productDetails.Fly_Type);
+    formData.append("Tags", productDetails.Tags);
+  
+
 
     axios
       .post(
@@ -496,14 +517,14 @@ function AddProduct() {
                         }
                       >
                         <option>Select One</option>
-                        <option>Fit</option>
-                        <option>Features</option>
-                        <option>Waist Rise</option>
-                        <option>Fly Type</option>
-                        <option>Length</option>
-                        <option>Closure</option>
-                        <option>Size & Fit</option>
-                        <option>Material & Care</option>
+                        <option value='Fit_Type'>Fit</option>
+                        <option value='Features'>Features</option>
+                        <option value='Waist_Rise'>Waist Rise</option>
+                        <option value='Fly_Type'>Fly Type</option>
+                        <option value='Length'>Length</option>
+                        <option value='Closure'>Closure</option>
+                        <option value='sizes'>Size & Fit</option>
+                        <option value='Fabric_Type'>Material & Care</option>
                       </Form.Select>
                     </div>
 
@@ -685,11 +706,11 @@ function AddProduct() {
                         value={fabric}
                       >
                         <option>Select One</option>
-                        <option>Cotton</option>
-                        <option>Silk</option>
-                        <option>Polyester</option>
-                        <option>Nylon</option>
-                        <option>Other</option>
+                        <option value='cotton'>Cotton</option>
+                        <option value='silk'>Silk</option>
+                        <option value='silk'>Polyester</option>
+                        <option value='nylon'>Nylon</option>
+                        <option value='other'>Other</option>
                       </Form.Select>
 
                       {/* Render the input field only when "Other" is selected */}
@@ -770,11 +791,11 @@ function AddProduct() {
                             }
                           >
                             <option>Select One</option>
-                            <option>Size</option>
-                            <option>Color</option>
-                            <option>Weight</option>
-                            <option>Smell</option>
-                            <option>Other</option>
+                            <option value='size'>Size</option>
+                            <option value='color'>Color</option>
+                            <option value='weight'>Weight</option>
+                            <option value='smell'>Smell</option>
+                            <option value='other'>Other</option>
                           </Form.Select>
                         </div>
 
