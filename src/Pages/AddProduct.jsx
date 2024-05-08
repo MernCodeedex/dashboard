@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Sidebar from "../Components/Sidebar";
 import Header from "../Components/Header";
 import { Col, DropdownItem, Form, Row } from "react-bootstrap";
@@ -10,17 +10,14 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import { EditorState } from "draft-js";
 import { Editor } from "react-draft-wysiwyg";
-import DropdownButton from 'react-bootstrap/DropdownButton';
+import DropdownButton from "react-bootstrap/DropdownButton";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
-import './Product.css'
-import ReactQuill from 'react-quill';
-import 'react-quill/dist/quill.snow.css';
-
-
+import "./Product.css";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 
 function AddProduct() {
-
-  const [editorValue, setEditorValue] = useState('');
+  const [editorValue, setEditorValue] = useState("");
   const [productDetails, setProductDetails] = useState({
     Product_Name: "",
     Description: "",
@@ -48,7 +45,6 @@ function AddProduct() {
     });
   };
   const handleCategorySelect = (eventKey) => {
-
     setProductDetails({
       ...productDetails,
       Category: eventKey,
@@ -129,7 +125,6 @@ function AddProduct() {
     backgroundColor: "#f6f8fb",
   };
 
-
   const [selectedImages, setSelectedImages] = useState([]);
 
   const handleFileSelect = (event) => {
@@ -155,34 +150,32 @@ function AddProduct() {
     }
   };
 
-
   const removeImage = (index) => {
     const newImages = [...selectedImages];
     newImages.splice(index, 1);
     setSelectedImages(newImages);
   };
 
-  const [fabric, setFabric] = useState('');
-  const [otherFabric, setOtherFabric] = useState('');
+  const [fabric, setFabric] = useState("");
+  const [otherFabric, setOtherFabric] = useState("");
 
   const handleFabricChange = (event) => {
     const selectedFabric = event.target.value;
     setFabric(selectedFabric);
 
     // Reset the otherFabric input when a different fabric is selected
-    if (selectedFabric !== 'Other') {
-      setOtherFabric('');
+    if (selectedFabric !== "Other") {
+      setOtherFabric("");
     }
   };
 
-
   const [options, setOptions] = useState([
-    { id: 1, name: '', value: '' } // Initial option
+    { id: 1, name: "", value: "" }, // Initial option
   ]);
 
   // Function to handle changes in option name
   const handleOptionNameChange = (id, value) => {
-    const updatedOptions = options.map(option =>
+    const updatedOptions = options.map((option) =>
       option.id === id ? { ...option, name: value } : option
     );
     setOptions(updatedOptions);
@@ -190,7 +183,7 @@ function AddProduct() {
 
   // Function to handle changes in option value
   const handleOptionValueChange = (id, value) => {
-    const updatedOptions = options.map(option =>
+    const updatedOptions = options.map((option) =>
       option.id === id ? { ...option, value: value } : option
     );
     setOptions(updatedOptions);
@@ -199,24 +192,23 @@ function AddProduct() {
   // Function to add a new option
   const addOption = () => {
     const newId = options.length + 1;
-    setOptions([...options, { id: newId, name: '', value: '' }]);
+    setOptions([...options, { id: newId, name: "", value: "" }]);
   };
 
   // Function to remove an option
   const removeOption = (id) => {
-    const updatedOptions = options.filter(option => option.id !== id);
+    const updatedOptions = options.filter((option) => option.id !== id);
     setOptions(updatedOptions);
   };
 
-
   // Define the initial state and functions for options on the left side
   const [leftOptions, setLeftOptions] = useState([
-    { id: 1, name: '', value: '' } // Initial option
+    { id: 1, name: "", value: "" }, // Initial option
   ]);
 
   // Function to handle changes in option name on the left side
   const handleLeftOptionNameChange = (id, value) => {
-    const updatedOptions = leftOptions.map(option =>
+    const updatedOptions = leftOptions.map((option) =>
       option.id === id ? { ...option, name: value } : option
     );
     setLeftOptions(updatedOptions);
@@ -224,7 +216,7 @@ function AddProduct() {
 
   // Function to handle changes in option value on the left side
   const handleLeftOptionValueChange = (id, value) => {
-    const updatedOptions = leftOptions.map(option =>
+    const updatedOptions = leftOptions.map((option) =>
       option.id === id ? { ...option, value: value } : option
     );
     setLeftOptions(updatedOptions);
@@ -233,43 +225,34 @@ function AddProduct() {
   // Function to add a new option on the left side
   const addLeftOption = () => {
     const newId = leftOptions.length + 1;
-    setLeftOptions([...leftOptions, { id: newId, name: '', value: '' }]);
+    setLeftOptions([...leftOptions, { id: newId, name: "", value: "" }]);
   };
 
   // Function to remove an option on the left side
   const removeLeftOption = (id) => {
-    const updatedOptions = leftOptions.filter(option => option.id !== id);
+    const updatedOptions = leftOptions.filter((option) => option.id !== id);
     setLeftOptions(updatedOptions);
   };
-
-
-
-
-
-
 
   return (
     <div style={{ overflow: "hidden" }}>
       <Header />
+      <Row></Row>
 
       <Row>
-        <Col lg={3}>
-          <Sidebar></Sidebar>
-        </Col>
+        <Col lg={2}>{/* <Sidebar ></Sidebar> */}</Col>
 
         <Col
-
+          className="ms-2"
           style={{
             backgroundColor: "#f6f8fb",
             borderLeft: "1px solid #b6b6b5",
-            width: "79%",
-            marginLeft: "-60px"
           }}
         >
           <Row>
             {" "}
-            <Col md={4}>
-              <h3 className="ms-5 mt-3 text-black">
+            <Col className="addpd" md={4} style={{ marginTop: "5%" }}>
+              <h3 className="ms-5 mt-5 text-black addpd">
                 {" "}
                 <b>Add a Product</b>
               </h3>
@@ -294,6 +277,7 @@ function AddProduct() {
                   border: "1px solid #c5c5c5",
                   height: "35px",
                   textTransform: "capitalize",
+                  marginTop: "12%",
                 }}
               >
                 Discard
@@ -306,6 +290,7 @@ function AddProduct() {
                   border: "1px solid #c3e0ff",
                   height: "35px",
                   textTransform: "capitalize",
+                  marginTop: "12%",
                 }}
               >
                 Save Draft
@@ -318,6 +303,7 @@ function AddProduct() {
                   backgroundColor: "#0468d5",
                   height: "35px",
                   textTransform: "capitalize",
+                  marginTop: "12%",
                 }}
               >
                 Publish Product
@@ -361,7 +347,15 @@ function AddProduct() {
                 <div className="imageContainer">
                   {selectedImages.map((image, index) => (
                     <div className="imgdiv" key={index}>
-                      <i className="fa-solid fa-xmark closeicon" onClick={() => removeImage(index)}></i>            <img className="subimage" src={image} alt={`Image ${index}`} />
+                      <i
+                        className="fa-solid fa-xmark closeicon"
+                        onClick={() => removeImage(index)}
+                      ></i>{" "}
+                      <img
+                        className="subimage"
+                        src={image}
+                        alt={`Image ${index}`}
+                      />
                     </div>
                   ))}
                 </div>
@@ -376,7 +370,7 @@ function AddProduct() {
                     marginBottom: "10%",
                     cursor: "pointer",
                   }}
-                  onClick={() => document.getElementById('fileInput').click()}
+                  onClick={() => document.getElementById("fileInput").click()}
                 >
                   <center>
                     <label htmlFor="fileInput" style={{ cursor: "pointer" }}>
@@ -462,23 +456,31 @@ function AddProduct() {
                 modules={{
                   toolbar: [
                     [{ header: [1, 2, false] }],
-                    ['bold', 'italic', 'underline', 'strike'],
+                    ["bold", "italic", "underline", "strike"],
                     [{ align: [] }],
-                    ['list', 'bullet'],
-                    ['link'],
-                    ['history'],
-                  ]
+                    ["list", "bullet"],
+                    ["link"],
+                    ["history"],
+                  ],
                 }}
                 theme="snow"
               />
               <div className="mt-5">
-                {leftOptions.map(option => (
+                {leftOptions.map((option) => (
                   <div key={option.id}>
-                    <h5 className="mt-2 ms-2" style={{ color: '#464646' }}>
+                    <h5
+                      className=" ms-2"
+                      style={{ color: "#464646", marginTop: "20%" }}
+                    >
                       <b style={{ marginLeft: "40px" }}>Options {option.id}</b>
                       {leftOptions.length > 1 && (
                         <Link
-                          style={{ textDecoration: 'none', color: '#0468d5', marginLeft: '10px',fontSize:"15px"}}
+                          style={{
+                            textDecoration: "none",
+                            color: "#0468d5",
+                            marginLeft: "10px",
+                            fontSize: "15px",
+                          }}
                           onClick={() => removeLeftOption(option.id)}
                         >
                           Remove
@@ -489,7 +491,9 @@ function AddProduct() {
                       <Form.Select
                         style={{ width: "83%", marginLeft: "38px" }}
                         id={`dropdown-button-drop-down-centered-${option.id}`}
-                        onChange={(e) => handleLeftOptionNameChange(option.id, e.target.value)}
+                        onChange={(e) =>
+                          handleLeftOptionNameChange(option.id, e.target.value)
+                        }
                       >
                         <option>Select One</option>
                         <option>Fit</option>
@@ -504,15 +508,17 @@ function AddProduct() {
                     </div>
 
                     <textarea
-                      onChange={(e) => handleLeftOptionValueChange(option.id, e.target.value)}
+                      onChange={(e) =>
+                        handleLeftOptionValueChange(option.id, e.target.value)
+                      }
                       className="mt-4 "
                       style={{
-                        width: '81%',
-                        height: '100px',
-                        border: '1px solid #ced4da',
-                        borderRadius: '4px',
-                        padding: '8px',
-                        marginLeft:"48px"
+                        width: "81%",
+                        height: "100px",
+                        border: "1px solid #ced4da",
+                        borderRadius: "4px",
+                        padding: "8px",
+                        marginLeft: "48px",
                       }}
                       placeholder="Enter text..."
                     />
@@ -523,19 +529,18 @@ function AddProduct() {
                   className=" mt-3"
                   variant="contained"
                   style={{
-                    backgroundColor: '#f6f8fb',
-                    color: '#0468d5',
-                    height: '35px',
-                    textTransform: 'capitalize',
-                    width: '81%',
-                    marginLeft:"50px"
+                    backgroundColor: "#f6f8fb",
+                    color: "#0468d5",
+                    height: "35px",
+                    textTransform: "capitalize",
+                    width: "81%",
+                    marginLeft: "50px",
                   }}
                   onClick={addLeftOption}
                 >
                   Add another Option
                 </Button>
               </div>
-
 
               <h5
                 className="ms-5  mt-5 text-black"
@@ -589,7 +594,7 @@ function AddProduct() {
                           placeholder="$$$"
                         />
                       </div>
-                      <div className="ms-3 mt-2">
+                      <div className="ms-4 mt-2">
                         <label
                           htmlFor=""
                           style={{ color: "#5b5a5a" }}
@@ -635,7 +640,6 @@ function AddProduct() {
                       </Link>
                     </p>
 
-
                     <div className="form-group p-2">
                       <Form.Select
                         onChange={(e) => handleGenderSelect(e.target.value)}
@@ -658,7 +662,6 @@ function AddProduct() {
                       </Link>
                     </p>
 
-
                     <div className="form-group p-2">
                       <Form.Select
                         id={`dropdown-button-drop-down-centered`}
@@ -669,16 +672,18 @@ function AddProduct() {
                         <option value="pants">Pant</option>
                         <option value="shoes">Shoes</option>
                         <option value="accessories">Accessories</option>
-
                       </Form.Select>
                     </div>
                     <p className="ms-2 mt-4" style={{ color: "#464646" }}>
                       <b>Fabric Details</b>
                     </p>
 
-
                     <div className="form-group p-2">
-                      <Form.Select id="fabricSelect" onChange={handleFabricChange} value={fabric}>
+                      <Form.Select
+                        id="fabricSelect"
+                        onChange={handleFabricChange}
+                        value={fabric}
+                      >
                         <option>Select One</option>
                         <option>Cotton</option>
                         <option>Silk</option>
@@ -688,14 +693,18 @@ function AddProduct() {
                       </Form.Select>
 
                       {/* Render the input field only when "Other" is selected */}
-                      {fabric === 'Other' && (
+                      {fabric === "Other" && (
                         <div>
-                          <label htmlFor="otherFabricInput">Other Fabric:</label>
+                          <label htmlFor="otherFabricInput">
+                            Other Fabric:
+                          </label>
                           <input
                             id="otherFabricInput"
                             type="text"
                             value={otherFabric}
-                            onChange={(event) => setOtherFabric(event.target.value)}
+                            onChange={(event) =>
+                              setOtherFabric(event.target.value)
+                            }
                             placeholder="Enter fabric name"
                           />
                         </div>
@@ -710,7 +719,6 @@ function AddProduct() {
                         View all tags
                       </Link>
                     </p>
-
 
                     <div className="form-group p-2">
                       <Form.Select
@@ -736,13 +744,18 @@ function AddProduct() {
                   md={8}
                 >
                   <div>
-                    {options.map(option => (
+                    {options.map((option) => (
                       <div key={option.id}>
-                        <h5 className="mt-2 ms-2" style={{ color: '#464646' }}>
+                        <h5 className="mt-2 ms-2" style={{ color: "#464646" }}>
                           <b>Options {option.id}</b>
                           {options.length > 1 && (
                             <Link
-                              style={{ textDecoration: 'none', color: '#0468d5', marginLeft: '10px',fontSize:"15px" }}
+                              style={{
+                                textDecoration: "none",
+                                color: "#0468d5",
+                                marginLeft: "10px",
+                                fontSize: "15px",
+                              }}
                               onClick={() => removeOption(option.id)}
                             >
                               Remove
@@ -752,7 +765,9 @@ function AddProduct() {
                         <div className="form-group p-2">
                           <Form.Select
                             id={`dropdown-button-drop-down-centered-${option.id}`}
-                            onChange={(e) => handleOptionNameChange(option.id, e.target.value)}
+                            onChange={(e) =>
+                              handleOptionNameChange(option.id, e.target.value)
+                            }
                           >
                             <option>Select One</option>
                             <option>Size</option>
@@ -764,14 +779,16 @@ function AddProduct() {
                         </div>
 
                         <textarea
-                          onChange={(e) => handleOptionValueChange(option.id, e.target.value)}
+                          onChange={(e) =>
+                            handleOptionValueChange(option.id, e.target.value)
+                          }
                           className="mt-4 ms-2"
                           style={{
-                            width: '90%',
-                            height: '100px',
-                            border: '1px solid #ced4da',
-                            borderRadius: '4px',
-                            padding: '8px',
+                            width: "90%",
+                            height: "100px",
+                            border: "1px solid #ced4da",
+                            borderRadius: "4px",
+                            padding: "8px",
                           }}
                           placeholder="Enter text..."
                         />
@@ -782,11 +799,11 @@ function AddProduct() {
                       className="ms-2 mt-3"
                       variant="contained"
                       style={{
-                        backgroundColor: '#f6f8fb',
-                        color: '#0468d5',
-                        height: '35px',
-                        textTransform: 'capitalize',
-                        width: '90%',
+                        backgroundColor: "#f6f8fb",
+                        color: "#0468d5",
+                        height: "35px",
+                        textTransform: "capitalize",
+                        width: "90%",
                       }}
                       onClick={addOption}
                     >
