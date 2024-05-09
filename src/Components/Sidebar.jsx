@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Sidebar as ProSidebar, Menu, MenuItem, SubMenu } from 'react-pro-sidebar';
 
 import './Sidebar.css'
@@ -11,15 +11,45 @@ import { MdEmail } from 'react-icons/md';
 import { BsCalendar3EventFill } from 'react-icons/bs';
 import { LiaTableSolid } from 'react-icons/lia';
 import { BiSolidComponent } from 'react-icons/bi';
+import Button from "react-bootstrap/Button";
+import { Offcanvas } from 'react-bootstrap';
 
 
 function Sidebar() {
+  const [show, setShow] = useState(false);
+
+
+const handleshow = () => setShow(true); 
+const handleClose = () => setShow(false);
+
+
 
  
   return (
-    <div>
-      <ProSidebar>
-        <Menu >
+    <>
+    
+    <div>  <Button
+        variant="secondary"
+        className="d-lg-none"
+        onClick={handleshow}
+        style={{
+          position: "absolute",
+          color: "black",
+          backgroundColor: "white",
+        }}
+      >
+        <i className="fa-solid fa-bars text-darks"></i>
+      </Button></div>
+      <Offcanvas
+        style={{ width: "254px" }}
+        show={show}
+        onHide={handleClose}
+        responsive="lg sm "
+      >
+    <div style={{position:"fixed",backgroundColor:"white",zIndex:"100",}}  >
+    <div style={{ height: '100vh', overflowY: 'auto',paddingBottom:"20px" }}>
+      <ProSidebar >
+        <Menu   >
           <SubMenu className="custom-submenu-content"  label="Home">
           <SubMenu className='msw' label="E-Commerce">
             <MenuItem> Admin </MenuItem>
@@ -100,7 +130,8 @@ function Sidebar() {
           </SubMenu>
         </Menu>
       </ProSidebar>
-    </div>
+      </div> </div></Offcanvas>
+    </>
   );
 }
 
