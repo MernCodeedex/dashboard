@@ -64,7 +64,7 @@ function AddProduct() {
   const handleTagSelect = (eventKey) => {
     setProductDetails({
       ...productDetails,
-      Color: eventKey,
+      Tags: eventKey,
     });
   };
   const handleSizeSelect = (eventKey) => {
@@ -145,36 +145,31 @@ function AddProduct() {
     borderBottom: "1px solid #ddd",
     backgroundColor: "#f6f8fb",
   };
-
   const [selectedImages, setSelectedImages] = useState([]);
 
   const handleFileSelect = (event) => {
     const files = event.target.files;
-    const imagesArray = [];
+    const fileObjects = Array.from(files);
 
-    for (let i = 0; i < files.length; i++) {
-      const file = files[i];
-      const reader = new FileReader();
+    setSelectedImages(fileObjects);
 
-      reader.onload = (e) => {
-        imagesArray.push(e.target.result);
-        if (imagesArray.length === files.length) {
-          setSelectedImages(imagesArray);
-          setProductDetails({
-            ...productDetails,
-            product_images: imagesArray,
-          });
-        }
-      };
-
-      reader.readAsDataURL(file);
-    }
+    // Update productDetails with file objects
+    setProductDetails({
+      ...productDetails,
+      product_images: fileObjects,
+    });
   };
 
   const removeImage = (index) => {
     const newImages = [...selectedImages];
     newImages.splice(index, 1);
     setSelectedImages(newImages);
+
+    // Also update productDetails if necessary
+    setProductDetails({
+      ...productDetails,
+      product_images: newImages,
+    });
   };
 
   const [fabric, setFabric] = useState("");
@@ -183,12 +178,14 @@ function AddProduct() {
   const handleFabricChange = (event) => {
     const selectedFabric = event.target.value;
     setFabric(selectedFabric);
-
     // Reset the otherFabric input when a different fabric is selected
-    if (selectedFabric !== "Other") {
+    if (selectedFabric !== "other") {
       setOtherFabric("");
     }
+    // Update the Fabric_Type property of productDetails
+    setProductDetails({ ...productDetails, Fabric_Type: selectedFabric });
   };
+
 
   const [options, setOptions] = useState([
     { id: 1, name: "", value: "" }, // Initial option
@@ -209,6 +206,14 @@ function AddProduct() {
     );
     setOptions(updatedOptions);
   };
+
+  for(let item of options){
+    for (let key in productDetails){
+     if(item.name==key){
+         productDetails[key] = item.value
+    }
+    }
+ }
 
   // Function to add a new option
   const addOption = () => {
@@ -242,6 +247,13 @@ function AddProduct() {
     );
     setLeftOptions(updatedOptions);
   };
+  for(let item of leftOptions){
+    for (let key in productDetails){
+     if(item.name==key){
+         productDetails[key] = item.value
+    }
+    }
+ }
 
   // Function to add a new option on the left side
   const addLeftOption = () => {
@@ -358,68 +370,68 @@ function AddProduct() {
                 type="text"
                 placeholder="Write title here..."
               />
-              <h5
-                className="ms-5 mt-5 text-black"
-                style={{ WebkitTextStroke: ".6px" }}
-              >
-                Display Image
-              </h5>
-              <div>
-                <div className="imageContainer">
-                  {selectedImages.map((image, index) => (
-                    <div className="imgdiv" key={index}>
-                      <i
-                        className="fa-solid fa-xmark closeicon"
-                        onClick={() => removeImage(index)}
-                      ></i>{" "}
-                      <img
-                        className="subimage"
-                        src={image}
-                        alt={`Image ${index}`}
-                      />
-                    </div>
-                  ))}
-                </div>
+             <h5
+  className="ms-5 mt-5 text-black"
+  style={{ WebkitTextStroke: ".6px" }}
+>
+  Display Image
+</h5>
+<div>
+  <div className="imageContainer">
+    {selectedImages.map((file, index) => (
+      <div className="imgdiv" key={index}>
+        <i
+          className="fa-solid fa-xmark closeicon"
+          onClick={() => removeImage(index)}
+        ></i>{" "}
+        <img
+          className="subimage"
+          src={URL.createObjectURL(file)}
+          alt={`Image ${index}`}
+        />
+      </div>
+    ))}
+  </div>
 
-                <div
-                  className="ms-5 mt-3"
-                  style={{
-                    paddingTop: "60px",
-                    border: "1px dashed ",
-                    width: "80%",
-                    height: "38vh",
-                    marginBottom: "10%",
-                    cursor: "pointer",
-                  }}
-                  onClick={() => document.getElementById("fileInput").click()}
-                >
-                  <center>
-                    <label htmlFor="fileInput" style={{ cursor: "pointer" }}>
-                      Drag Your Photos here or{" "}
-                      <span>
-                        <span
-                          style={{ textDecoration: "none", color: "#0468d5" }}
-                          href=""
-                        >
-                          Browse from device
-                        </span>
-                      </span>
-                    </label>
-                    <input
-                      onChange={handleFileSelect}
-                      type="file"
-                      id="fileInput"
-                      multiple
-                      style={{ display: "none" }}
-                    />
-                    <br />
-                    <i
-                      style={{ color: "#667283" }}
-                      className="fa-solid fa-image fa-3x mt-2"
-                    ></i>
-                  </center>
-                </div>
-              </div>
+  <div
+    className="ms-5 mt-3"
+    style={{
+      paddingTop: "60px",
+      border: "1px dashed ",
+      width: "80%",
+      height: "38vh",
+      marginBottom: "10%",
+      cursor: "pointer",
+    }}
+    onClick={() => document.getElementById("fileInput").click()}
+  >
+    <center>
+      <label htmlFor="fileInput" style={{ cursor: "pointer" }}>
+        Drag Your Photos here or{" "}
+        <span>
+          <span
+            style={{ textDecoration: "none", color: "#0468d5" }}
+            href=""
+          >
+            Browse from device
+          </span>
+        </span>
+      </label>
+      <input
+        onChange={handleFileSelect}
+        type="file"
+        id="fileInput"
+        multiple
+        style={{ display: "none" }}
+      />
+      <br />
+      <i
+        style={{ color: "#667283" }}
+        className="fa-solid fa-image fa-3x mt-2"
+      ></i>
+    </center>
+  </div>
+</div>
               <h5
                 className="ms-5 mt-5 text-black"
                 style={{ WebkitTextStroke: ".6px" }}
@@ -524,7 +536,7 @@ function AddProduct() {
                         <option value='Length'>Length</option>
                         <option value='Closure'>Closure</option>
                         <option value='sizes'>Size & Fit</option>
-                        <option value='Fabric_Type'>Material & Care</option>
+                        {/* <option value='Fabric_Type'>Material & Care</option> */}
                       </Form.Select>
                     </div>
 
@@ -700,37 +712,37 @@ function AddProduct() {
                     </p>
 
                     <div className="form-group p-2">
-                      <Form.Select
-                        id="fabricSelect"
-                        onChange={handleFabricChange}
-                        value={fabric}
-                      >
-                        <option>Select One</option>
-                        <option value='cotton'>Cotton</option>
-                        <option value='silk'>Silk</option>
-                        <option value='silk'>Polyester</option>
-                        <option value='nylon'>Nylon</option>
-                        <option value='other'>Other</option>
-                      </Form.Select>
+  <Form.Select
+    id="fabricSelect"
+    onChange={(e) => handleFabricChange(e)}
+    value={fabric}
+  >
+    <option>Select One</option>
+    <option value='cotton'>Cotton</option>
+    <option value='silk'>Silk</option>
+    <option value='polyester'>Polyester</option>
+    <option value='nylon'>Nylon</option>
+    {/* <option value='other'>Other</option> */}
+  </Form.Select>
 
-                      {/* Render the input field only when "Other" is selected */}
-                      {fabric === "Other" && (
-                        <div>
-                          <label htmlFor="otherFabricInput">
-                            Other Fabric:
-                          </label>
-                          <input
-                            id="otherFabricInput"
-                            type="text"
-                            value={otherFabric}
-                            onChange={(event) =>
-                              setOtherFabric(event.target.value)
-                            }
-                            placeholder="Enter fabric name"
-                          />
-                        </div>
-                      )}
-                    </div>
+  {/* Render the input field only when "Other" is selected */}
+  {fabric === "other" && (
+    <div>
+      <label htmlFor="otherFabricInput">
+        Other Fabric:
+      </label>
+      <input
+        id="otherFabricInput"
+        type="text"
+        value={otherFabric}
+        onChange={(event) =>
+          setOtherFabric(event.target.value)
+        }
+        placeholder="Enter fabric name"
+      />
+    </div>
+  )}
+</div>
 
                     <p className="ms-2 mt-4" style={{ color: "#464646" }}>
                       <b> Tags</b>{" "}
@@ -791,11 +803,11 @@ function AddProduct() {
                             }
                           >
                             <option>Select One</option>
-                            <option value='size'>Size</option>
-                            <option value='color'>Color</option>
-                            <option value='weight'>Weight</option>
+                            {/* <option value='size'>Size</option> */}
+                            <option value='Color'>Color</option>
+                            {/* <option value='weight'>Weight</option>
                             <option value='smell'>Smell</option>
-                            <option value='other'>Other</option>
+                            <option value='other'>Other</option> */}
                           </Form.Select>
                         </div>
 
