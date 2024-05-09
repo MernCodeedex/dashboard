@@ -124,6 +124,9 @@ function AddProduct() {
             icon: "success",
             title: "Submitted",
             text: "Your form has been successfully submitted!",
+          }).then(() => {
+            // Refresh the page after the success message is dismissed
+            window.location.reload();
           });
         }
       })
@@ -498,14 +501,14 @@ function AddProduct() {
                 }}
                 theme="snow"
               />
-              <div className="mt-5">
+              <div className="mt-5 ">
                 {leftOptions.map((option) => (
-                  <div key={option.id}>
+                  <div key={option.id} className="option">
                     <h5
-                      className=" ms-2"
-                      style={{ color: "#464646", marginTop: "20%" }}
+                      className=" ms-2 "
+                      style={{ color: "#464646", marginTop: "15%" }}
                     >
-                      <b style={{ marginLeft: "40px" }}>Options {option.id}</b>
+                      <b className="" style={{ marginLeft: "40px" }}>Options {option.id}</b>
                       {leftOptions.length > 1 && (
                         <Link
                           style={{
