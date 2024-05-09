@@ -584,7 +584,7 @@ function AddProduct() {
               >
                 Inventory
               </h5>
-              <div className="ms-5 mt-3">
+              <div className="ms-5 mt-3" style={{width:"81%"}}>
                 <div className="d-flex border">
                   <div style={sidebarStyle}>
                     <div style={itemStyle}>
