@@ -74,11 +74,8 @@ function Products() {
                 <Sidebar />
             </Col>
             <Col>
-            <div style={{paddingRight : "150px", marginLeft: "50px"}}>
-            <div style={{ marginBottom: '10px' }}>
-                        {previousPage && <Link style={{textDecoration:"none"}} onClick={handlePreviousPage}>Previous/ </Link>}
-                        {nextPage && <Link style={{textDecoration:"none"}} onClick={handleNextPage}>Next</Link>}
-                    </div>
+            <div style={{paddingRight : "150px", marginLeft: "-6px", background: "rgb(245, 245, 251)", marginBottom: "-40px"}}>
+            
                 <div>
                     <h1>Products</h1>
                 </div>
@@ -120,19 +117,7 @@ function Products() {
                    
                 {/* </div> */}
                 <div style={{ marginTop: "20px" }}>
-                    <Table striped="columns">
-                        {/* <thead>
-                            <tr>
-                                <th>#</th>
-                                <th></th>
-                                <th>Product Name</th>
-                                <th>Price</th>
-                                <th>Category</th>
-                                <th>Tags</th>
-                                <th>Vendor</th>
-                                <th>Published On</th>
-                            </tr>
-                        </thead> */}
+                    <Table striped bordered>
                         <tbody>
                         {loading ? (
                         <p>Loading...</p>
@@ -143,7 +128,7 @@ function Products() {
                             <Table striped="columns">
                                 <thead>
                                     <tr>
-                                        <th>#</th>
+                                    <th><input type="checkbox" style={{ width: "15px", height: "15px" }} /></th>
                                         <th></th>
                                         <th>Product Name</th>
                                         <th>Price</th>
@@ -156,7 +141,7 @@ function Products() {
                                 <tbody>
                                     {products.map((product, index) => (
                                         <tr key={product.id}>
-                                            <td>{index + 1}</td>
+                                             <th><input type="checkbox" style={{ width: "15px", height: "15px" }} /></th>
                                             <td>
                                             {/* <ProductDetails product={product} />  */}
                                             <img src={product.product_images[0]} alt={`Product Image 0`} className="imgdivv" />
@@ -186,6 +171,10 @@ function Products() {
                 </div>
             </Col>
         </Row>
+        <div style={{ marginBottom: '10px' }}>
+                        {previousPage && <Link style={{textDecoration:"none"}} onClick={handlePreviousPage}>Previous/ </Link>}
+                        {nextPage && <Link style={{textDecoration:"none"}} onClick={handleNextPage}>Next</Link>}
+                    </div>
     </div>
     )
 }

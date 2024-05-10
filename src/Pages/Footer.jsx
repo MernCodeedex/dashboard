@@ -1,58 +1,62 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React from 'react';
+import { FaFacebookSquare } from "react-icons/fa";
+import { FaSquareTwitter } from "react-icons/fa6";
+import { Link } from 'react-router-dom';
 
 const Footer = () => {
-    return (
-        <footer style={{ backgroundColor: 'rgb(225, 234, 237)', color: 'black', padding: '20px 0', fontSize: '14px' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%', flexWrap: 'wrap' }}>
-                <p style={{ width: '30%', marginBottom: '10px' }}>Phoenix is an admin dashboard template with fascinating features and amazing layout. The template is responsive to all major browsers and is compatible with all available devices and screen sizes.</p>
-                <div style={{ width: '70%', display: 'flex', justifyContent: 'space-between' }}>
-                    <div style={{ flex: '1', marginRight: '20px', marginBottom: '20px' }}>
-                        <div>
-                            <h4>About Phoenix</h4>
-                            <ul style={{ listStyleType: 'none', padding: 0 }}>
-                                <li style={{ marginBottom: '5px' }}><Link to="#" style={{ color: 'black', textDecoration: "none" }}>Careers</Link></li>
-                                <li style={{ marginBottom: '5px' }}><Link to="#" style={{ color: 'black', textDecoration: "none" }}>Affiliate Program</Link></li>
-                                <li style={{ marginBottom: '5px' }}><Link to="#" style={{ color: 'black', textDecoration: "none" }}>Privacy Policy</Link></li>
-                                <li style={{ marginBottom: '5px' }}><Link to="#" style={{ color: 'black', textDecoration: "none" }}>Terms & Conditions</Link></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div style={{ flex: '1', marginRight: '20px', marginBottom: '20px' }}>
-                        <div>
-                            <h4>Stay Connected</h4>
-                            <ul style={{ listStyleType: 'none', padding: 0 }}>
-                                <li style={{ marginBottom: '5px' }}><Link to="#" style={{ color: 'black', textDecoration: "none" }}>Blogs</Link></li>
-                                <li style={{ marginBottom: '5px' }}><Link to="#" style={{ color: 'black', textDecoration: "none" }}>Facebook</Link></li>
-                                <li style={{ marginBottom: '5px' }}><Link to="#" style={{ color: 'black', textDecoration: "none" }}>Twitter</Link></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div style={{ flex: '1', marginRight: '20px', marginBottom: '20px' }}>
-                        <div>
-                            <h4>Customer Service</h4>
-                            <ul style={{ listStyleType: 'none', padding: 0 }}>
-                                <li style={{ marginBottom: '5px' }}><Link to="#" style={{ color: 'black', textDecoration: "none" }}>Help Desk</Link></li>
-                                <li style={{ marginBottom: '5px' }}><Link to="#" style={{ color: 'black', textDecoration: "none" }}>Support, 24/7</Link></li>
-                                <li style={{ marginBottom: '5px' }}><Link to="#" style={{ color: 'black', textDecoration: "none" }}>Community of Phoenix</Link></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div style={{ flex: '1', marginBottom: '20px' }}>
-                        <div>
-                            <h4>Payment Methods</h4>
-                            <ul style={{ listStyleType: 'none', padding: 0 }}>
-                                <li style={{ marginBottom: '5px' }}><Link to="#" style={{ color: 'black', textDecoration: "none" }}>Cash on Delivery</Link></li>
-                                <li style={{ marginBottom: '5px' }}><Link to="#" style={{ color: 'black', textDecoration: "none" }}>Online Payment</Link></li>
-                                <li style={{ marginBottom: '5px' }}><Link to="#" style={{ color: 'black', textDecoration: "none" }}>PayPal</Link></li>
-                                <li style={{ marginBottom: '5px' }}><Link to="#" style={{ color: 'black', textDecoration: "none" }}>Installment</Link></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+  return (
+    <footer style={{ backgroundColor: 'rgb(235, 238, 240)', color: '#333', padding: '20px', height: "250px" }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', maxWidth: '1200px', margin: '0 auto' }}>
+        <div style={{ flex: '1' }}>
+          {/* First div content */}<h3 style={{color: "gray"}}>
+          <img style={{width: "30px"}} src="https://prium.github.io/phoenix/v1.15.0/assets/img/icons/logo.png" alt="img" />
+          phoenix</h3>
+          <p style={{width: "500px", fontSize: "13px"}} >Phoenix is an admin dashboard template with fascinating features and amazing layout. The template is responsive to all major browsers and is compatible with all available devices and screen sizes.</p>
+        </div>
+        <div style={{ flex: '1' }}>
+          {/* Second div content with 4 columns */}
+          <div style={{ display: 'flex', justifyContent: 'flex-start',fontSize: "10px" }}>
+            <div style={{ marginRight: '20px', fontSize: "13px" }}>
+              <h6>About Phoenix</h6>
+              <ul style={{ listStyleType: 'none', padding: 0 }}>
+               <Link style={{color: "gray"}} to='#'> <li>Careers</li></Link>
+                <Link style={{color: "gray"}} to='#'><li>Affiliate Program</li></Link>
+                <Link style={{color: "gray"}} to='#'><li>Privacy Policy</li></Link>
+                <Link style={{color: "gray"}} to='#'><li>Terms & Conditions</li></Link>
+              </ul>
             </div>
-        </footer>
-    )
-}
+            <div style={{ marginRight: '40px' }}>
+              <h6>Stay Connected</h6>
+              <ul style={{ listStyleType: 'none', padding: 0, color: "gray" }}>
+              <Link style={{color: "gray"}} to='#'><li>Blogs</li></Link>
+              <Link style={{color: "gray"}} to='#'> <li><FaFacebookSquare style={{color: "blue"}}/>Facebook</li></Link>
+              <Link style={{color: "gray"}} to='#'> <li><FaSquareTwitter style={{color: "blue"}} />Twitter</li></Link>
+              </ul>
+            </div>
+            <div style={{ marginRight: '20px', fontSize: "13px"  }}>
+              <h6>Customer Service</h6>
+              <ul style={{ listStyleType: 'none', padding: 0, color: "gray" }}>
+              <Link style={{color: "gray"}} to='#'> <li>Help Desk</li></Link>
+              <Link style={{color: "gray"}} to='#'> <li>Support, 24/7</li></Link>
+              <Link style={{color: "gray"}} to='#'> <li>Community of Phoenix</li></Link>
+              </ul>
+            </div>
+            <div>
+            <div style={{ marginRight: '20px', fontSize: "13px" }}>
+              <h6>Payment Methods</h6>
+              <ul style={{ listStyleType: 'none', padding: 0, color: "gray" }}>
+              <Link style={{color: "gray"}} to='#'> <li>Cash on Delivery</li></Link>
+              <Link style={{color: "gray"}} to='#'> <li>Online Payment</li></Link>
+              <Link style={{color: "gray"}} to='#'> <li>PayPal</li></Link>
+              <Link style={{color: "gray"}} to='#'> <li>Installment</li></Link>
+              </ul>
+            </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
+};
 
-export default Footer
+export default Footer;

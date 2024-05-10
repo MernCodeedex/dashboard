@@ -183,5 +183,71 @@
     height: 2px; 
     background-color: blue; 
 }
+.left{
+    margin-top: 25px;
+    margin-left: 212px;
+    margin-right: 5%;
+    display: flex; 
+    flex-wrap: wrap;
+}
+.Right {
+   width: 380px;
+   border: 1px solid #ccc; 
+   border-radius: 8px;
+   margin-left: 233px;
+   height: 420px;
+   margin-bottom: 100px;
+   background-color: #fff;
+   margin-top: 30px;
+   align-items: center;
+   
+   
+}
+.Right p{
+    /* border-bottom: 1px dashed rgb(227, 227, 227); */
+    margin-left: 15px;
+    margin-right: 15px;
+    font-size: smaller;
+    color: gray;
+    font-weight: bold;
+    
+
+}
+.Right h4, h5{
+    margin-left: 15px;
+    margin-right: 15px;
+}
+.Right h5{
+    font-size: large;
+    padding-top: 10px;
+}
+.Right button{
+    padding: 6px 15px;
+    border-color: #ff7f0e;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-left: 181px;
+    margin-top: -40px;
+    background-color: transparent;
+    border: 1px solid #ff7f0e;
+    color: #ff7f0e;
+    font-size: small;
+    font-weight: bold;
+}   
+.Right button:hover{
+    background-color: #ff7f0e;
+    color: #fff;
+}
+.quantity-btn{
+    background-color: "transparent";
+    border: 1px solid blue ;
+    border-radius:5px ;
+    color:blue ;
+    padding: 6px 10px;
+    cursor: pointer;
+    margin: 0 5px;
+    width: 35px;
+}
+
 
 

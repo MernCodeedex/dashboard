@@ -3,6 +3,7 @@
         // import Products from './Products';
         import axios from 'axios';
         import { FiShoppingCart } from "react-icons/fi";
+        import { IoCart } from "react-icons/io5";
         import { IoIosNotificationsOutline } from "react-icons/io";
         import { FiUser } from "react-icons/fi";
         import { BsList } from "react-icons/bs";
@@ -11,6 +12,7 @@
         import Content from './Content';
         import Reviews from './Reviews';
         import Footer from '../Pages/Footer'
+        import {Row, Col} from 'react-bootstrap'
 
         const ProductDetails = (products) => {
             const { productId } = useParams(); 
@@ -20,7 +22,8 @@
             const [selectedImage, setSelectedImage] = useState(null);
             const [selectedSize, setSelectedSize] = useState(null);
             const [searchTerm, setSearchTerm] = useState(''); 
-            const [selectedTab, setSelectedTab] = useState('ratings');
+            const [selectedTab, setSelectedTab] = useState('description');
+            const [quantity, setQuantity] = useState(1);
             
             useEffect(() => {
                 const fetchProductDetails = async () => {
@@ -60,7 +63,15 @@
             const handleAddToWishlist = () => {
                 console.log('Product added to wishlist:', product);
             };
-
+            const handleIncreaseQuantity = () => {
+                setQuantity(prevQuantity => prevQuantity + 1);
+            };
+        
+            const handleDecreaseQuantity = () => {
+                if (quantity > 1) {
+                    setQuantity(prevQuantity => prevQuantity - 1);
+                }
+            };
             if (!product) {
                 return <p>Product not found</p>;
             }
@@ -131,8 +142,8 @@
             )}
             </div>
             <div className='btns' style={{ marginTop: "-40px", marginLeft: "132px" }}>
-            <button onClick={handleAddToWishlist} style={{ marginLeft: "10px" }}><CiHeart />Add to Wishlist</button>
-                    <button style={{background: "ff7f0e"}} onClick={handleAddToCart}><FiShoppingCart /> Add to Cart</button>
+            <button onClick={handleAddToWishlist} style={{ marginLeft: "10px" }}><CiHeart style={{width: "30px", height: "25px"}}/>Add to Wishlist</button>
+                    <button style={{background: "ff7f0e"}} onClick={handleAddToCart}><IoCart style={{width: "30px", height: "25px"}} /> Add to Cart</button>
                  
                 </div>
         </div>
@@ -154,11 +165,17 @@
                         value={selectedSize}
                         onChange={(e) => setSelectedSize(e.target.value)}className="custom-select"
                     >
-                        <option value="">Select Size</option>
+                        {/* <option value="">Select Size</option> */}
                         {product.sizes.map((size, index) => (
                             <option key={index} value={size}>{size}</option>
                         ))}
                     </select>
+                    <div style={{ display: 'flex', alignItems: 'center', marginLeft: '10px' }}>
+        <label style={{marginTop: "-72px", marginLeft: "151px"}} htmlFor='quantity'>Quantity:</label>
+        <button className='quantity-btn'  onClick={handleDecreaseQuantity} >-</button>
+        <span style={{ margin: '0 10px' }}>{quantity}</span>
+        <button className='quantity-btn'onClick={handleIncreaseQuantity}>+</button>
+    </div>
             </div>
             </div>
             <div className="Second-container" style={{ marginTop: '20px', marginLeft: '20px', marginRight: "5%", display: "flex" }}>
@@ -169,17 +186,32 @@
                 </div>
                 
             </div>
-            <div className='Left' style={{ marginTop: '20px', marginLeft: '200px', marginRight: "5%", textAlign: "justify", display: "flex", flexWrap: "wrap" }}>
-                {tabContent}
-                <div className="Right" style={{ width: '25%', marginTop: '-3px', border: '1px solid #ccc', borderRadius: '8px', marginLeft: '280px',height: "390px", marginBottom: "100px" }}>
-                    <h4>Usually Bought Together</h4>
-                    <p>with 24" iMac® with Retina 4.5K display -</p>
-                    <h4 style={{color: "grey", paddingTop: "250px"}}>Total</h4>
-                    <h4 style={{ fontWeight: "bold" }}> ${product.Offer_Price}</h4>
-
-                </div>
+            <Row>
+    <Col>
+        <div className='Left' style={{ marginTop: '20px', marginLeft: '200px', marginRight: "5%", display: "flex", flexWrap: "wrap" }}>
+            {tabContent}
+        </div>
+    </Col>
+    <Col>
+        <div className="Right">
+            <h5>Usually Bought Together</h5>
+            <p>with 24" iMac® with Retina 4.5K display -</p>
+            <p style={{ borderTop: '1px dashed gray', marginBottom: '10px' }}></p>
+            <div style={{paddingTop: "240px"}}>
+            <p style={{ borderTop: '1px dashed gray', marginBottom: '10px' }}></p>
+            <h4 style={{ color: "grey" }}>Total</h4>
             </div>
+            <button>Add 3 Items to Cart <IoCart style={{width: "20px", height: "25px"}}/></button>
+        </div>
+    </Col>
+</Row>
+
         <Footer/>
+        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+  <p>Thank you for creating with Phoenix|2024 <Link to="#">©Themewagon</Link></p>
+  <p>v1.15.0</p>
+</div>
+        
             </div>
 
 
