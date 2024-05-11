@@ -14,6 +14,8 @@ function Products() {
     const [error, setError] = useState(null);
     const [nextPage, setNextPage] = useState(null);
     const [previousPage, setPreviousPage] = useState(null);
+    const [activePage, setActivePage] = useState(1);
+
     const params = useParams();
     const userId = params.userId;
 
@@ -48,6 +50,7 @@ function Products() {
                     setProducts(response.data.results);
                     setNextPage(response.data.next);
                     setPreviousPage(response.data.previous);
+                    setActivePage(activePage + 1);
                 } catch (error) {
                     console.error('Error fetching next page products:', error);
                     setError('Error fetching next page products. Please try again later.');
@@ -55,11 +58,16 @@ function Products() {
             };
 
             const handlePreviousPage = async () => {
-                try {
-                    const response = await axios.get(previousPage);
+                try { 
+                    
+                    if (!previousPage) {
+                    return; // Exit early if previousPage is null
+                }
+                     const response = await axios.get(previousPage);
                     setProducts(response.data.results);
                     setNextPage(response.data.next);
                     setPreviousPage(response.data.previous);
+                    setActivePage(activePage - 1);
                 } catch (error) {
                     console.error('Error fetching previous page products:', error);
                     setError('Error fetching previous page products. Please try again later.');
@@ -67,7 +75,7 @@ function Products() {
             };
 
     return  (
-        <div style={{ overflow: "hidden" }}>
+        <div style={{ overflow: "hidden",borderRight: "1px solid #ccc"}}>
         <Header />
         <Row>
             <Col lg={2}>
@@ -171,10 +179,30 @@ function Products() {
                 </div>
             </Col>
         </Row>
-        <div style={{ marginBottom: '10px' }}>
-                        {previousPage && <Link style={{textDecoration:"none"}} onClick={handlePreviousPage}>Previous/ </Link>}
-                        {nextPage && <Link style={{textDecoration:"none"}} onClick={handleNextPage}>Next</Link>}
-                    </div>
+        <div style={{marginLeft: "91%"}}>
+                <span style={{ marginRight: '5px', cursor: 'pointer' }}>
+                    {'<'}
+                    <button className={`Pagination-btn ${activePage === 1 ? 'active' : ''}`}  onClick={handlePreviousPage} >
+                        <span style={{ margin: '0 5px', cursor: "pointer", color: previousPage ? 'black' : 'blue', border: 'none', background: 'none', outline: 'none' }}>1</span>
+                    </button>
+                </span>
+                <span style={{ marginLeft: '5px', cursor: 'pointer' }}>
+                    <button className={`Pagination-btn ${activePage === 2 ? 'active' : ''}`} onClick={handleNextPage}>
+                        <span style={{ margin: '0 5px', cursor: "pointer", color: nextPage ? 'black' : 'blue' }}>2</span>
+                    </button>
+                    {'>'}
+                </span>
+            </div>
+            <div className="footer-container">
+    <div className="footer-row">
+
+    </div>
+    <div className="second-footer-row">
+    <p>Thank you for creating with Phoenix|2024 <Link to="#">©Themewagon</Link></p>
+    <p style={{marginLeft: "780px"}}>v1.15.0</p>
+    </div>
+</div>
+
     </div>
     )
 }

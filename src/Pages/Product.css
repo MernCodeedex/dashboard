@@ -55,3 +55,52 @@
     margin-left: 10px;
     margin-top: 8px;
 }
+.Pagination-btn {
+    background-color: transparent; 
+    color: rgb(248, 242, 242);
+    border: none;
+    padding: 5px 10px;
+    margin: 0 5px;
+    cursor: pointer;
+    border-radius: 5px;
+   
+}
+
+ /* .Pagination-btn:hover {
+    background-color: rgb(41, 121, 227); 
+} */
+
+.Pagination-btn.active {
+    background-color: rgb(15, 69, 149); 
+    color: white; 
+}
+.footer-container {
+    background-color: rgb(245, 245, 251);
+    padding: 20px;
+    margin-top: 20px;
+    display: table;
+    width: 100%;
+    height: 100px;
+    margin-left: 250px;
+    border-left: 1px solid #ccc;
+    border-top: 1px solid #ccc;
+}
+
+/* .footer-row {
+    display: table-row;
+}
+
+.footer-row > div {
+    display: table-cell;
+    padding: 5px;
+    border: 1px solid #ccc;
+} */
+.footer-row{
+    border-bottom: 1px solid #ccc;
+    width: 100%;
+    margin-top: 70px;
+}
+.second-footer-row{
+    display: flex;
+}
+
