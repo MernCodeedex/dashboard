@@ -435,12 +435,7 @@ function AddProduct() {
     </center>
   </div>
 </div>
-              <h5
-                className="ms-5 mt-5 text-black"
-                style={{ WebkitTextStroke: ".6px" }}
-              >
-                Product Description
-              </h5>
+             
               {/* <div className="ms-5 mt-3" style={{ width: "80%" }}>
                 <Editor
                   editorState={editorState}
@@ -457,9 +452,16 @@ function AddProduct() {
                     },
                   }}
                 />
-              </div>
+              </div>*/}
+               <h5
+                className="ms-5  text-black"
+                style={{ WebkitTextStroke: ".6px" }}
+              >
+                Product Description
+              </h5>
+          
               <textarea
-                className="ms-5 "
+                className="ms-5 mt-2 "
                 onChange={(e) =>
                   setProductDetails({
                     ...productDetails,
@@ -478,8 +480,8 @@ function AddProduct() {
                   height: "28vh",
                 }}
                 placeholder="Write a description here..."
-              /> */}
-              <ReactQuill
+              /> 
+              {/* <ReactQuill
                 style={{ width: "80%", marginLeft: "47px", height: "150px" }}
                 value={editorValue}
                 onChange={(content, delta, source, editor) => {
@@ -500,7 +502,7 @@ function AddProduct() {
                   ],
                 }}
                 theme="snow"
-              />
+              /> */}
               <div className="mt-5 ">
                 {leftOptions.map((option) => (
                   <div key={option.id} className="option">

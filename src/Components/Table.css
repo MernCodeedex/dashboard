@@ -1,0 +1,11 @@
+.theading{
+    font-size: 13px;
+    text-align: center;
+    
+}
+
+tbody tr td.tdetails {
+    background-color: rgb(255, 255, 255);
+    font-size: 13px;
+    text-align: center;
+}
