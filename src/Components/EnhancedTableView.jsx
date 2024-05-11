@@ -158,7 +158,7 @@ export default function EnhancedTable() {
   const isSelected = (id) => selected.indexOf(id) !== -1;
 
   return (
-    <div style={{ overflowX: "auto" }}>
+    <div className="ms-5" style={{ overflowX: "auto" }}>
       <Container fluid>
         <Table style={{ backgroundColor: "white" }}>
           <thead>
