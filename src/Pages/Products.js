@@ -6,6 +6,7 @@ import axios from 'axios';
 import { Col, Form, Row, Table } from 'react-bootstrap';
 import './Product.css';
 import { Link, useParams } from 'react-router-dom';
+import { IoMdStarOutline } from "react-icons/io";
 import ProductDetails from './ProductDetails';
 
 function Products() {
@@ -78,33 +79,38 @@ function Products() {
                 <Col xl={8} lg={10} md={12}>
                     <div className="content-container">
                     <div className='upper-section'>
-                    <h3 style={{fontWeight: "bolder", marginTop: "20px"}}>Products</h3>
-                    <div style={{ display: "flex", marginTop: "25px" }}>
-                        <p style={{ marginRight: "20px" }}>All (6708)</p>
-                        <p style={{ marginRight: "20px", color: "blue" }}>Published (568)</p>
-                        <p style={{ marginRight: "20px", color: "blue" }}>Drafts (60)</p>
-                        <p style={{ color: "blue" }}>On Discount (4550)</p>
+                        <div className='pagination-top'>
+                        <Link to="#">Page1</Link> {'>'}
+                        <Link to="#">Page2</Link> {'>'}
+                        <p>Default</p>
+                        </div>
+                    <h2 style={{fontWeight: "bold", marginTop: "5px"}}>Products</h2>
+                    <div style={{ display: "flex", marginTop: "25px", fontSize: "12px", fontWeight: "500" }}>
+                        <p style={{ marginRight: "20px" }}>All <span style={{ color: "gray" }}>(6708)</span></p>
+                        <p style={{ marginRight: "20px", color: "rgb(71, 166, 225)" }}>Published<span style={{ color: "gray" }}>(568)</span> </p>
+                        <p style={{ marginRight: "20px", color: "rgb(71, 166, 225)" }}>Drafts <span style={{ color: "gray" }}>(60)</span></p>
+                        <p style={{ color: "rgb(71, 166, 225)" }}>On Discount <span style={{ color: "gray" }}>(4550)</span></p>
                     </div>
                     <div className="search-1" style={{ display: "flex", alignItems: "center" }}>
                         <form action="/search" method="get" style={{ marginRight: "10px" }}>
                             <input type="text" name="search" placeholder="Search Products" style={{ width: "102%" }} />
                         </form>
-                        <div className="form-group w-25 p-2" style={{ marginRight: "10px" }}>
-                            <Form.Select>
+                        <div className="form-group w-25 p-2" style={{ marginRight: "-18px", backgroundColor: "transparent" }}>
+                            <Form.Select style={{backgroundColor: "transparent"}}>
                                 <option>Category</option>
                                 <option>Men</option>
 
                             </Form.Select>
                         </div>
-                        <div className="form-group w-25 p-2" style={{ marginRight: "10px" }}>
-                            <Form.Select>
+                        <div className="form-group w-25 p-2" style={{ marginRight: "-18px" }}>
+                            <Form.Select style={{backgroundColor: "transparent"}}>
                                 <option>Vendor</option>
                                 <option>Men</option>
 
                             </Form.Select>
                         </div>
                         <div className="form-group w-25 p-2">
-                            <Form.Select>
+                            <Form.Select style={{backgroundColor: "transparent"}}>
                                 <option>More Filters</option>
                                 <option>Men</option>
 
@@ -118,46 +124,57 @@ function Products() {
                     </div>
                     </div>
                         <div className="table-section">
-                            <Table striped bordered>
-                                <tbody>
+                            <Table className='main-table'>
+                                <tbody style={{fontSize: "13px"}}>
                                     {loading ? (
                                         <p>Loading...</p>
                                     ) : error ? (
                                         <p>{error}</p>
                                     ) : (
                                         <div>
-                                            <Table striped="columns">
+                                            <Table  style={{backgroundColor: "white"}}>
                                                 <thead>
                                                     <tr>
                                                         <th><input type="checkbox" /></th>
                                                         <th></th>
-                                                        <th>Product Name</th>
-                                                        <th>Price</th>
-                                                        <th>Category</th>
-                                                        <th>Tags</th>
-                                                        <th>Vendor</th>
-                                    <th>Published On</th>
+                                                        <th style={{fontSize: "13.8px", color: "rgb(90, 88, 88)"}}>PRODUCT NAME</th>
+                                                        <th style={{fontSize: "13.8px", color: "rgb(90, 88, 88)"}}>PRICE</th>
+                                                        <th style={{fontSize: "13.8px", color: "rgb(90, 88, 88)"}}>CATEGORY</th>
+                                                        <th style={{fontSize: "13.8px", color: "rgb(90, 88, 88)",width: "223px"}}>TAGS</th>
+                                                        <th style={{fontSize: "13.8px", color: "rgb(90, 88, 88)"}}>VENDOR</th>
+                                                        <th style={{fontSize: "13.8px", color: "rgb(90, 88, 88)"}}>PUBLISHED ON</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
                                                     {products.map((product, index) => (
                                                         <tr key={product.id}>
-                                                            <th><input type="checkbox" /></th>
+                                                            <th><input type="checkbox" style={{height: "20px"}} /></th>
                                                             <td>
                                                                 <img src={product.product_images[0]} alt={`Product Image 0`} className="product-image" />
                                                             </td>
-                                                            <Link to={`/product/${product.id}`}>
+                                                            <Link style={{color: "blue"}} to={`/product/${product.id}`}>
                                                                 <td>{product.Product_Name}</td>
                                                             </Link> 
                                                             <td>${product.Offer_Price}</td>
                                                             <td>{product.Category}</td>
-                                                            <td>{product.Tags}</td>
+                                                            <td>
+                                                            <div style={{ position: 'relative' }}>
+                                                                 <ul>
+                                                            <div className="tag-container">
+                                                            <button className="tag">Dress</button>
+                                                            <button className="tag">High quality</button>
+                                                           <button className="tag">Fashion</button>
+                                                           </div>
+                                                             <div style={{ position: 'absolute', top: 0, right: 0 }}><IoMdStarOutline style={{ fontSize: '20px', color: "rgba(232, 176, 8, 0.889)" }} /></div>
+                                                             </ul>
+                                                             </div>
+                                                            </td>
                                                         </tr>
                                                     ))}
                                                 </tbody>
                                             </Table>
                                         </div>
-                                    )}
+                                    )}  
                                 </tbody>
                             </Table>
                         </div>
