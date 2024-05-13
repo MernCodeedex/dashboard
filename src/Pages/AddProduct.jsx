@@ -80,6 +80,7 @@ function AddProduct() {
   //   });
   // };
 
+  
   //api to add products
   const handlesubmit = () => {
     const formData = new FormData();
@@ -134,6 +135,7 @@ function AddProduct() {
         console.log(error);
       });
   };
+
 
   //sidebar style
   const sidebarStyle = {
@@ -235,13 +237,20 @@ function AddProduct() {
     { id: 1, name: "", value: "" }, // Initial option
   ]);
 
+  const [selectedOptions, setSelectedOptions] = useState([]);
+
   // Function to handle changes in option name on the left side
   const handleLeftOptionNameChange = (id, value) => {
     const updatedOptions = leftOptions.map((option) =>
       option.id === id ? { ...option, name: value } : option
     );
     setLeftOptions(updatedOptions);
+  
+    // Add the selected option to the selectedOptions state
+    setSelectedOptions((prevSelectedOptions) => [...prevSelectedOptions, value]);
   };
+
+  
 
   // Function to handle changes in option value on the left side
   const handleLeftOptionValueChange = (id, value) => {
@@ -526,23 +535,20 @@ function AddProduct() {
                       )}
                     </h5>
                     <div className="form-group p-2">
-                      <Form.Select
-                        style={{ width: "83%", marginLeft: "38px" }}
-                        id={`dropdown-button-drop-down-centered-${option.id}`}
-                        onChange={(e) =>
-                          handleLeftOptionNameChange(option.id, e.target.value)
-                        }
-                      >
-                        <option>Select One</option>
-                        <option value='Fit_Type'>Fit</option>
-                        <option value='Features'>Features</option>
-                        <option value='Waist_Rise'>Waist Rise</option>
-                        <option value='Fly_Type'>Fly Type</option>
-                        <option value='Length'>Length</option>
-                        <option value='Closure'>Closure</option>
-                        <option value='sizes'>Size & Fit</option>
-                        {/* <option value='Fabric_Type'>Material & Care</option> */}
-                      </Form.Select>
+                    <Form.Select
+  style={{ width: "83%", marginLeft: "38px" }}
+  id={`dropdown-button-drop-down-centered-${option.id}`}
+  onChange={(e) => handleLeftOptionNameChange(option.id, e.target.value)}
+>
+  <option>Select One</option>
+  {['Fit_Type', 'Features', 'Waist_Rise', 'Fly_Type', 'Length', 'Closure', 'sizes']
+    .filter((optionValue) => !selectedOptions.includes(optionValue))
+    .map((optionValue) => (
+      <option key={optionValue} value={optionValue}>
+        {optionValue}
+      </option>
+    ))}
+</Form.Select>
                     </div>
 
                     <textarea
