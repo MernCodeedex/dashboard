@@ -135,6 +135,8 @@ function Products() {
                                                         <th>Price</th>
                                                         <th>Category</th>
                                                         <th>Tags</th>
+                                                        <th>Vendor</th>
+                                    <th>Published On</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
