@@ -220,4 +220,5 @@
 
         export default ProductDetails
 
-                    
+  
+

@@ -1,8 +1,17 @@
 .css-ewdv3l{
     overflow:hidden ;
   }
+  .custom-sidebar {
+    background-color: white;
+  }
   
-  
+  /* Responsive styles */
+  @media screen and (max-width: 768px) {
+    .custom-sidebar {
+      width: 100%;
+      margin-top: 60px; /* Adjust as needed */
+    }
+  }
   
   .css-16jesut > .ps-menu-button {
     height: 35px !important; /* Change the height to your desired value */

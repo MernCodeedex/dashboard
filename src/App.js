@@ -1,11 +1,9 @@
 import { Route, Routes, useParams } from 'react-router-dom';
 import './App.css';
-import axios from 'axios';
 import AddProduct from './Pages/AddProduct';
 import Products from './Pages/Products';
 import Customers from './Pages/Customers';
 import CustomerDetails from './Pages/CustomerDetails';
-import ViewProducts from './Pages/ViewProducts';
 import ProductDetails from './Pages/ProductDetails'
 import { useEffect, useState } from 'react';
 

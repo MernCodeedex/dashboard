@@ -17,7 +17,7 @@ function Sidebar() {
 
  
   return (
-    <div>
+    <div className='custom-sidebar'>
       <ProSidebar>
         <Menu >
           <SubMenu className="custom-submenu-content"  label="Home">
