@@ -141,6 +141,7 @@ function Products() {
                                                         <th style={{fontSize: "13.8px", color: "rgb(90, 88, 88)"}}>PRICE</th>
                                                         <th style={{fontSize: "13.8px", color: "rgb(90, 88, 88)"}}>CATEGORY</th>
                                                         <th style={{fontSize: "13.8px", color: "rgb(90, 88, 88)",width: "223px"}}>TAGS</th>
+                                                        <th></th>
                                                         <th style={{fontSize: "13.8px", color: "rgb(90, 88, 88)"}}>VENDOR</th>
                                                         <th style={{fontSize: "13.8px", color: "rgb(90, 88, 88)"}}>PUBLISHED ON</th>
                                                     </tr>
@@ -152,21 +153,21 @@ function Products() {
                                                             <td>
                                                                 <img src={product.product_images[0]} alt={`Product Image 0`} className="product-image" />
                                                             </td>
-                                                            <Link style={{color: "blue"}} to={`/product/${product.id}`}>
+                                                            <Link style={{color: "blue", marginLeft: "41px"}} to={`/product/${product.id}`}>
                                                                 <td>{product.Product_Name}</td>
                                                             </Link> 
                                                             <td>${product.Offer_Price}</td>
                                                             <td>{product.Category}</td>
                                                             <td>
-                                                            <div style={{ position: 'relative' }}>
-                                                                 <ul>
+                                                            <div className="product-tags" style={{ position: 'relative' }}>
+                                                                
                                                             <div className="tag-container">
                                                             <button className="tag">Dress</button>
                                                             <button className="tag">High quality</button>
                                                            <button className="tag">Fashion</button>
                                                            </div>
-                                                             <div style={{ position: 'absolute', top: 0, right: 0 }}><IoMdStarOutline style={{ fontSize: '20px', color: "rgba(232, 176, 8, 0.889)" }} /></div>
-                                                             </ul>
+                                                             <div style={{ position: 'absolute', top: 0, right: 0 }}><IoMdStarOutline className="star-icon" style={{ fontSize: '20px', color: "rgba(232, 176, 8, 0.889)" }} /></div>
+                                                            
                                                              </div>
                                                             </td>
                                                         </tr>
