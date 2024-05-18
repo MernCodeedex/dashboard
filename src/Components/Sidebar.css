@@ -4,7 +4,6 @@
   .custom-sidebar {
     background-color: white;
   }
-  
   /* Responsive styles */
   @media screen and (max-width: 768px) {
     .custom-sidebar {

@@ -6,6 +6,7 @@ import Customers from './Pages/Customers';
 import CustomerDetails from './Pages/CustomerDetails';
 import ProductDetails from './Pages/ProductDetails'
 import { useEffect, useState } from 'react';
+import Order from './Pages/Order';
 
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
    <Route path={"/details"} element={<CustomerDetails/>}></Route>
    {/* <Route path="/products/:userId" element={<ViewProducts />}/> */}
 <Route path="/product/:productId" element={<ProductDetails/>} />  
+<Route path='/order/:userId' element={<Order/>}/>
    </Routes>
     </div>
   );

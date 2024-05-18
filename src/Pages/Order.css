@@ -1,0 +1,190 @@
+      .order-container {
+          background-color: rgb(245, 245, 251);
+          min-height: 100vh; 
+          position: relative;
+          padding-bottom: 40px;
+          padding-left: 15px; 
+          padding-right: 15px; 
+      }
+      .sidebar-container {
+          border-right: 1px solid #787272;
+          height: 100vh; 
+      }
+      .left-container{
+        width: 80%;
+        margin-left: 0;
+      }
+      .left-sub{
+          margin-top: 20px;
+          /* margin-left: 50px; */
+          display: flex;
+          font-size: 12px;
+          margin-left: 20px;
+          
+      }
+      .h2{
+          font-weight: bolder;
+          margin-left: 50px;
+      }
+      .left-sub a {
+          margin-right: 5px;
+          text-decoration: none; 
+          font-weight: bold;
+        }
+        
+        .left-sub p {
+          margin: 0 5px; 
+          color: rgb(73, 71, 71);
+          font-weight: 500;
+        }
+        .table-container {
+          max-width: 800px;
+          margin: 0 auto;
+          padding: 20px;
+          font-family: Arial, sans-serif;
+          position: relative;
+          
+          
+        }
+        .table-wrapper {
+          max-height: 543px;
+          max-width: calc(100% - 50px); /* Adjust as needed */
+          overflow-x: scroll;
+          position: relative;
+          margin-left: -93px;
+        }
+        .table-wrapper::-webkit-scrollbar {
+          height: 5px; /* Change this value to adjust the scrollbar height */
+      }
+      .table-wrapper::-webkit-scrollbar-thumb {
+        background-color: #bebaba; /* Color of the scrollbar thumb */
+        border-radius: 3px; /* Rounded corners for the scrollbar thumb */
+    }
+    .table-wrapper::-webkit-scrollbar-thumb:hover {
+      background-color: #aaa6a6;
+  }
+  .table-wrapper::-webkit-scrollbar-track {
+    background-color: #f1f1f1; 
+  }
+        .table-container table {
+          width: 100%;
+          height: 400px;
+          border-collapse: collapse;
+          border-spacing: 0;
+          font-size: 14px;
+          border-top: 1px solid #ddd;
+          border-bottom: 1px solid #ddd;
+          min-width: 800px;
+        }
+      
+        .table-container th,
+        .table-container td {
+          padding: 10px;
+          text-align: left;
+          border-bottom: 1px solid #ddd;
+        }
+        
+        .table-container th {
+          background-color: transparent;
+          font-size: 12px;
+          color: rgb(77, 75, 75);
+          font-weight: bold;
+        }
+        .table-container td img {
+          width: 50px;
+          height: 50px;
+          margin-right: 10px;
+          vertical-align: middle;
+        }
+        .subtotal { 
+          font-weight: 200;
+          display: flex;
+          justify-content: space-between;
+          font-size: medium;
+          margin-top: 20px;
+          margin-left: -72px;
+        }
+        
+        .subtotal p:first-child {
+          margin-right: 10px;
+        }
+        
+        .right-container{
+          width: 20%;
+          margin-left: 0;
+        }
+        .card{
+          margin-left: -250px;
+          margin-right: 50px;
+          margin-top: 144px;
+          height: 350px;
+          width: 380px;
+        }
+        .summary-line {
+          display: flex;
+          justify-content: space-between;
+          margin-bottom: 20px;
+          font-size: 14px;
+        }
+        .dashed-line {
+          border-top: 1px dashed gray;
+          margin: 20px 0; /* Space around the dashed line */
+        }
+        
+        .total-line {
+          font-weight: bold;
+          margin-top: 20px; /* Additional space above the total line */
+        }
+        .sub-order{
+          font-size: 13px;
+          color: rgb(78, 77, 77);
+          font-weight: 700;
+        }
+        .order-details{
+          display: flex;
+          margin-top: 30px;
+          margin-left: -49px;
+          width: 657px;
+          gap: 40px;
+        }
+  
+        .order-details-sub{
+          font-size: 12px;
+        }
+      .bottom-line {
+          width: 100%;
+          height: 2px;
+          background-color: #c4c0c0; /* Adjust color as needed */
+          position: absolute;
+          bottom: 0;
+          left: 0;
+      }
+
+      @media (max-width: 768px) {
+          .left-sub {
+              flex-direction: column;
+              align-items: flex-start;
+          }
+      }
+      @media (max-width: 1280px) {
+          .left-container{
+            margin-left: 51px;
+          }
+          .right-container{
+            flex: 1;
+              margin-left: 85%;
+              margin-top: -101.7%;
+          }
+          .table-wrapper{
+            margin-left: -20px;
+            max-width: calc(100% - 40px);
+            width: 590px;
+          }
+          .subtotal{
+            padding-right: 60px;
+            margin-left: -20px;
+          }
+          .order-details{
+            margin-left: 7px;
+          }
+      }
